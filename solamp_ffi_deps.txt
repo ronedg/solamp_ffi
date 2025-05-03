@@ -1,0 +1,1879 @@
+solamp_ffi v0.1.0 (/Users/ronedgar/git/solamp_ffi)
+├── anchor-lang v0.31.1
+│   ├── anchor-attribute-access-control v0.31.1 (proc-macro)
+│   │   ├── anchor-syn v0.31.1
+│   │   │   ├── anyhow v1.0.98
+│   │   │   ├── bs58 v0.5.1
+│   │   │   ├── heck v0.3.3
+│   │   │   │   └── unicode-segmentation v1.12.0
+│   │   │   ├── proc-macro2 v1.0.95
+│   │   │   │   └── unicode-ident v1.0.18
+│   │   │   ├── quote v1.0.40
+│   │   │   │   └── proc-macro2 v1.0.95 (*)
+│   │   │   ├── serde v1.0.219
+│   │   │   │   └── serde_derive v1.0.219 (proc-macro)
+│   │   │   │       ├── proc-macro2 v1.0.95 (*)
+│   │   │   │       ├── quote v1.0.40 (*)
+│   │   │   │       └── syn v2.0.101
+│   │   │   │           ├── proc-macro2 v1.0.95 (*)
+│   │   │   │           ├── quote v1.0.40 (*)
+│   │   │   │           └── unicode-ident v1.0.18
+│   │   │   ├── serde_json v1.0.140
+│   │   │   │   ├── itoa v1.0.15
+│   │   │   │   ├── memchr v2.7.4
+│   │   │   │   ├── ryu v1.0.20
+│   │   │   │   └── serde v1.0.219 (*)
+│   │   │   ├── sha2 v0.10.9
+│   │   │   │   ├── cfg-if v1.0.0
+│   │   │   │   ├── cpufeatures v0.2.17
+│   │   │   │   │   └── libc v0.2.172
+│   │   │   │   └── digest v0.10.7
+│   │   │   │       ├── block-buffer v0.10.4
+│   │   │   │       │   └── generic-array v0.14.7
+│   │   │   │       │       └── typenum v1.18.0
+│   │   │   │       │       [build-dependencies]
+│   │   │   │       │       └── version_check v0.9.5
+│   │   │   │       └── crypto-common v0.1.6
+│   │   │   │           ├── generic-array v0.14.7 (*)
+│   │   │   │           └── typenum v1.18.0
+│   │   │   ├── syn v1.0.109
+│   │   │   │   ├── proc-macro2 v1.0.95 (*)
+│   │   │   │   ├── quote v1.0.40 (*)
+│   │   │   │   └── unicode-ident v1.0.18
+│   │   │   └── thiserror v1.0.69
+│   │   │       └── thiserror-impl v1.0.69 (proc-macro)
+│   │   │           ├── proc-macro2 v1.0.95 (*)
+│   │   │           ├── quote v1.0.40 (*)
+│   │   │           └── syn v2.0.101 (*)
+│   │   ├── proc-macro2 v1.0.95 (*)
+│   │   ├── quote v1.0.40 (*)
+│   │   └── syn v1.0.109 (*)
+│   ├── anchor-attribute-account v0.31.1 (proc-macro)
+│   │   ├── anchor-syn v0.31.1 (*)
+│   │   ├── bs58 v0.5.1
+│   │   ├── proc-macro2 v1.0.95 (*)
+│   │   ├── quote v1.0.40 (*)
+│   │   └── syn v1.0.109 (*)
+│   ├── anchor-attribute-constant v0.31.1 (proc-macro)
+│   │   ├── anchor-syn v0.31.1 (*)
+│   │   ├── quote v1.0.40 (*)
+│   │   └── syn v1.0.109 (*)
+│   ├── anchor-attribute-error v0.31.1 (proc-macro)
+│   │   ├── anchor-syn v0.31.1 (*)
+│   │   ├── quote v1.0.40 (*)
+│   │   └── syn v1.0.109 (*)
+│   ├── anchor-attribute-event v0.31.1 (proc-macro)
+│   │   ├── anchor-syn v0.31.1 (*)
+│   │   ├── proc-macro2 v1.0.95 (*)
+│   │   ├── quote v1.0.40 (*)
+│   │   └── syn v1.0.109 (*)
+│   ├── anchor-attribute-program v0.31.1 (proc-macro)
+│   │   ├── anchor-lang-idl v0.1.2
+│   │   │   ├── anchor-lang-idl-spec v0.1.0
+│   │   │   │   ├── anyhow v1.0.98
+│   │   │   │   └── serde v1.0.219 (*)
+│   │   │   ├── anyhow v1.0.98
+│   │   │   ├── heck v0.3.3 (*)
+│   │   │   ├── serde v1.0.219 (*)
+│   │   │   ├── serde_json v1.0.140 (*)
+│   │   │   └── sha2 v0.10.9 (*)
+│   │   ├── anchor-syn v0.31.1 (*)
+│   │   ├── anyhow v1.0.98
+│   │   ├── bs58 v0.5.1
+│   │   ├── heck v0.3.3 (*)
+│   │   ├── proc-macro2 v1.0.95 (*)
+│   │   ├── quote v1.0.40 (*)
+│   │   ├── serde_json v1.0.140 (*)
+│   │   └── syn v1.0.109 (*)
+│   ├── anchor-derive-accounts v0.31.1 (proc-macro)
+│   │   ├── anchor-syn v0.31.1 (*)
+│   │   ├── quote v1.0.40 (*)
+│   │   └── syn v1.0.109 (*)
+│   ├── anchor-derive-serde v0.31.1 (proc-macro)
+│   │   ├── anchor-syn v0.31.1 (*)
+│   │   ├── borsh-derive-internal v0.10.4
+│   │   │   ├── proc-macro2 v1.0.95 (*)
+│   │   │   ├── quote v1.0.40 (*)
+│   │   │   └── syn v1.0.109 (*)
+│   │   ├── proc-macro2 v1.0.95 (*)
+│   │   ├── quote v1.0.40 (*)
+│   │   └── syn v1.0.109 (*)
+│   ├── anchor-derive-space v0.31.1 (proc-macro)
+│   │   ├── proc-macro2 v1.0.95 (*)
+│   │   ├── quote v1.0.40 (*)
+│   │   └── syn v1.0.109 (*)
+│   ├── base64 v0.21.7
+│   ├── bincode v1.3.3
+│   │   └── serde v1.0.219
+│   │       └── serde_derive v1.0.219 (proc-macro) (*)
+│   ├── borsh v0.10.4
+│   │   ├── borsh-derive v0.10.4 (proc-macro)
+│   │   │   ├── borsh-derive-internal v0.10.4 (*)
+│   │   │   ├── borsh-schema-derive-internal v0.10.4
+│   │   │   │   ├── proc-macro2 v1.0.95 (*)
+│   │   │   │   ├── quote v1.0.40 (*)
+│   │   │   │   └── syn v1.0.109 (*)
+│   │   │   ├── proc-macro-crate v0.1.5
+│   │   │   │   └── toml v0.5.11
+│   │   │   │       └── serde v1.0.219 (*)
+│   │   │   ├── proc-macro2 v1.0.95 (*)
+│   │   │   └── syn v1.0.109 (*)
+│   │   └── hashbrown v0.13.2
+│   │       └── ahash v0.8.11
+│   │           ├── cfg-if v1.0.0
+│   │           ├── getrandom v0.2.16
+│   │           │   ├── cfg-if v1.0.0
+│   │           │   └── libc v0.2.172
+│   │           ├── once_cell v1.21.3
+│   │           └── zerocopy v0.7.35
+│   │           [build-dependencies]
+│   │           └── version_check v0.9.5
+│   ├── bytemuck v1.23.0
+│   │   └── bytemuck_derive v1.9.3 (proc-macro)
+│   │       ├── proc-macro2 v1.0.95 (*)
+│   │       ├── quote v1.0.40 (*)
+│   │       └── syn v2.0.101 (*)
+│   ├── solana-program v2.2.1
+│   │   ├── bincode v1.3.3 (*)
+│   │   ├── blake3 v1.8.2
+│   │   │   ├── arrayref v0.3.9
+│   │   │   ├── arrayvec v0.7.6
+│   │   │   ├── cfg-if v1.0.0
+│   │   │   ├── constant_time_eq v0.3.1
+│   │   │   └── digest v0.10.7
+│   │   │       ├── block-buffer v0.10.4
+│   │   │       │   └── generic-array v0.14.7
+│   │   │       │       └── typenum v1.18.0
+│   │   │       │       [build-dependencies]
+│   │   │       │       └── version_check v0.9.5
+│   │   │       ├── crypto-common v0.1.6
+│   │   │       │   ├── generic-array v0.14.7 (*)
+│   │   │       │   └── typenum v1.18.0
+│   │   │       └── subtle v2.6.1
+│   │   │   [build-dependencies]
+│   │   │   └── cc v1.2.21
+│   │   │       ├── jobserver v0.1.33
+│   │   │       │   └── libc v0.2.172
+│   │   │       ├── libc v0.2.172
+│   │   │       └── shlex v1.3.0
+│   │   ├── borsh v0.10.4 (*)
+│   │   ├── borsh v1.5.7
+│   │   │   └── borsh-derive v1.5.7 (proc-macro)
+│   │   │       ├── once_cell v1.21.3
+│   │   │       ├── proc-macro-crate v3.3.0
+│   │   │       │   └── toml_edit v0.22.26
+│   │   │       │       ├── indexmap v2.9.0
+│   │   │       │       │   ├── equivalent v1.0.2
+│   │   │       │       │   └── hashbrown v0.15.3
+│   │   │       │       ├── toml_datetime v0.6.9
+│   │   │       │       └── winnow v0.7.9
+│   │   │       ├── proc-macro2 v1.0.95 (*)
+│   │   │       ├── quote v1.0.40 (*)
+│   │   │       └── syn v2.0.101 (*)
+│   │   │   [build-dependencies]
+│   │   │   └── cfg_aliases v0.2.1
+│   │   ├── bs58 v0.5.1
+│   │   ├── bytemuck v1.23.0 (*)
+│   │   ├── lazy_static v1.5.0
+│   │   ├── log v0.4.27
+│   │   ├── memoffset v0.9.1
+│   │   │   [build-dependencies]
+│   │   │   └── autocfg v1.4.0
+│   │   ├── num-bigint v0.4.6
+│   │   │   ├── num-integer v0.1.46
+│   │   │   │   └── num-traits v0.2.19
+│   │   │   │       [build-dependencies]
+│   │   │   │       └── autocfg v1.4.0
+│   │   │   └── num-traits v0.2.19 (*)
+│   │   ├── num-derive v0.4.2 (proc-macro)
+│   │   │   ├── proc-macro2 v1.0.95 (*)
+│   │   │   ├── quote v1.0.40 (*)
+│   │   │   └── syn v2.0.101 (*)
+│   │   ├── num-traits v0.2.19 (*)
+│   │   ├── rand v0.8.5
+│   │   │   ├── libc v0.2.172
+│   │   │   ├── rand_chacha v0.3.1
+│   │   │   │   ├── ppv-lite86 v0.2.21
+│   │   │   │   │   └── zerocopy v0.8.25
+│   │   │   │   └── rand_core v0.6.4
+│   │   │   │       └── getrandom v0.2.16 (*)
+│   │   │   └── rand_core v0.6.4 (*)
+│   │   ├── serde v1.0.219 (*)
+│   │   ├── serde_bytes v0.11.17
+│   │   │   └── serde v1.0.219 (*)
+│   │   ├── serde_derive v1.0.219 (proc-macro) (*)
+│   │   ├── solana-account-info v2.2.1
+│   │   │   ├── bincode v1.3.3 (*)
+│   │   │   ├── serde v1.0.219 (*)
+│   │   │   ├── solana-program-error v2.2.1
+│   │   │   │   ├── borsh v1.5.7 (*)
+│   │   │   │   ├── num-traits v0.2.19 (*)
+│   │   │   │   ├── serde v1.0.219 (*)
+│   │   │   │   ├── serde_derive v1.0.219 (proc-macro) (*)
+│   │   │   │   ├── solana-decode-error v2.2.1
+│   │   │   │   │   └── num-traits v0.2.19 (*)
+│   │   │   │   ├── solana-instruction v2.2.1
+│   │   │   │   │   ├── bincode v1.3.3 (*)
+│   │   │   │   │   ├── borsh v1.5.7 (*)
+│   │   │   │   │   ├── num-traits v0.2.19 (*)
+│   │   │   │   │   ├── serde v1.0.219 (*)
+│   │   │   │   │   ├── serde_derive v1.0.219 (proc-macro) (*)
+│   │   │   │   │   └── solana-pubkey v2.2.1
+│   │   │   │   │       ├── borsh v0.10.4 (*)
+│   │   │   │   │       ├── borsh v1.5.7 (*)
+│   │   │   │   │       ├── bs58 v0.5.1
+│   │   │   │   │       ├── bytemuck v1.23.0 (*)
+│   │   │   │   │       ├── bytemuck_derive v1.9.3 (proc-macro) (*)
+│   │   │   │   │       ├── curve25519-dalek v4.1.3
+│   │   │   │   │       │   ├── cfg-if v1.0.0
+│   │   │   │   │       │   ├── digest v0.10.7 (*)
+│   │   │   │   │       │   ├── rand_core v0.6.4 (*)
+│   │   │   │   │       │   ├── subtle v2.6.1
+│   │   │   │   │       │   └── zeroize v1.8.1
+│   │   │   │   │       │       └── zeroize_derive v1.4.2 (proc-macro)
+│   │   │   │   │       │           ├── proc-macro2 v1.0.95 (*)
+│   │   │   │   │       │           ├── quote v1.0.40 (*)
+│   │   │   │   │       │           └── syn v2.0.101 (*)
+│   │   │   │   │       │   [build-dependencies]
+│   │   │   │   │       │   └── rustc_version v0.4.1
+│   │   │   │   │       │       └── semver v1.0.26
+│   │   │   │   │       ├── five8_const v0.1.4
+│   │   │   │   │       │   └── five8_core v0.1.2
+│   │   │   │   │       ├── num-traits v0.2.19 (*)
+│   │   │   │   │       ├── rand v0.8.5 (*)
+│   │   │   │   │       ├── serde v1.0.219 (*)
+│   │   │   │   │       ├── serde_derive v1.0.219 (proc-macro) (*)
+│   │   │   │   │       ├── solana-atomic-u64 v2.2.1
+│   │   │   │   │       │   └── parking_lot v0.12.3
+│   │   │   │   │       │       ├── lock_api v0.4.12
+│   │   │   │   │       │       │   └── scopeguard v1.2.0
+│   │   │   │   │       │       │   [build-dependencies]
+│   │   │   │   │       │       │   └── autocfg v1.4.0
+│   │   │   │   │       │       └── parking_lot_core v0.9.10
+│   │   │   │   │       │           ├── cfg-if v1.0.0
+│   │   │   │   │       │           ├── libc v0.2.172
+│   │   │   │   │       │           └── smallvec v1.15.0
+│   │   │   │   │       ├── solana-decode-error v2.2.1 (*)
+│   │   │   │   │       ├── solana-sanitize v2.2.1
+│   │   │   │   │       └── solana-sha256-hasher v2.2.1
+│   │   │   │   │           ├── sha2 v0.10.9
+│   │   │   │   │           │   ├── cfg-if v1.0.0
+│   │   │   │   │           │   └── digest v0.10.7 (*)
+│   │   │   │   │           └── solana-hash v2.2.1
+│   │   │   │   │               ├── borsh v1.5.7 (*)
+│   │   │   │   │               ├── bs58 v0.5.1
+│   │   │   │   │               ├── bytemuck v1.23.0 (*)
+│   │   │   │   │               ├── bytemuck_derive v1.9.3 (proc-macro) (*)
+│   │   │   │   │               ├── serde v1.0.219 (*)
+│   │   │   │   │               ├── serde_derive v1.0.219 (proc-macro) (*)
+│   │   │   │   │               ├── solana-atomic-u64 v2.2.1 (*)
+│   │   │   │   │               └── solana-sanitize v2.2.1
+│   │   │   │   ├── solana-msg v2.2.1
+│   │   │   │   └── solana-pubkey v2.2.1 (*)
+│   │   │   ├── solana-program-memory v2.2.1
+│   │   │   │   └── num-traits v0.2.19 (*)
+│   │   │   └── solana-pubkey v2.2.1 (*)
+│   │   ├── solana-address-lookup-table-interface v2.2.2
+│   │   │   ├── bincode v1.3.3 (*)
+│   │   │   ├── bytemuck v1.23.0 (*)
+│   │   │   ├── serde v1.0.219 (*)
+│   │   │   ├── serde_derive v1.0.219 (proc-macro) (*)
+│   │   │   ├── solana-clock v2.2.1
+│   │   │   │   ├── serde v1.0.219 (*)
+│   │   │   │   ├── serde_derive v1.0.219 (proc-macro) (*)
+│   │   │   │   ├── solana-sdk-ids v2.2.1
+│   │   │   │   │   └── solana-pubkey v2.2.1 (*)
+│   │   │   │   ├── solana-sdk-macro v2.2.1 (proc-macro)
+│   │   │   │   │   ├── bs58 v0.5.1
+│   │   │   │   │   ├── proc-macro2 v1.0.95 (*)
+│   │   │   │   │   ├── quote v1.0.40 (*)
+│   │   │   │   │   └── syn v2.0.101 (*)
+│   │   │   │   └── solana-sysvar-id v2.2.1
+│   │   │   │       ├── solana-pubkey v2.2.1 (*)
+│   │   │   │       └── solana-sdk-ids v2.2.1 (*)
+│   │   │   ├── solana-instruction v2.2.1 (*)
+│   │   │   ├── solana-pubkey v2.2.1 (*)
+│   │   │   ├── solana-sdk-ids v2.2.1 (*)
+│   │   │   └── solana-slot-hashes v2.2.1
+│   │   │       ├── serde v1.0.219 (*)
+│   │   │       ├── serde_derive v1.0.219 (proc-macro) (*)
+│   │   │       ├── solana-hash v2.2.1 (*)
+│   │   │       ├── solana-sdk-ids v2.2.1 (*)
+│   │   │       └── solana-sysvar-id v2.2.1 (*)
+│   │   ├── solana-atomic-u64 v2.2.1 (*)
+│   │   ├── solana-big-mod-exp v2.2.1
+│   │   │   ├── num-bigint v0.4.6 (*)
+│   │   │   └── num-traits v0.2.19 (*)
+│   │   ├── solana-bincode v2.2.1
+│   │   │   ├── bincode v1.3.3 (*)
+│   │   │   ├── serde v1.0.219 (*)
+│   │   │   └── solana-instruction v2.2.1 (*)
+│   │   ├── solana-blake3-hasher v2.2.1
+│   │   │   ├── blake3 v1.8.2 (*)
+│   │   │   ├── solana-hash v2.2.1 (*)
+│   │   │   └── solana-sanitize v2.2.1
+│   │   ├── solana-borsh v2.2.1
+│   │   │   ├── borsh v0.10.4 (*)
+│   │   │   └── borsh v1.5.7 (*)
+│   │   ├── solana-clock v2.2.1 (*)
+│   │   ├── solana-cpi v2.2.1
+│   │   │   ├── solana-account-info v2.2.1 (*)
+│   │   │   ├── solana-instruction v2.2.1 (*)
+│   │   │   ├── solana-program-error v2.2.1 (*)
+│   │   │   └── solana-pubkey v2.2.1 (*)
+│   │   ├── solana-decode-error v2.2.1 (*)
+│   │   ├── solana-epoch-rewards v2.2.1
+│   │   │   ├── serde v1.0.219 (*)
+│   │   │   ├── serde_derive v1.0.219 (proc-macro) (*)
+│   │   │   ├── solana-hash v2.2.1 (*)
+│   │   │   ├── solana-sdk-ids v2.2.1 (*)
+│   │   │   ├── solana-sdk-macro v2.2.1 (proc-macro) (*)
+│   │   │   └── solana-sysvar-id v2.2.1 (*)
+│   │   ├── solana-epoch-schedule v2.2.1
+│   │   │   ├── serde v1.0.219 (*)
+│   │   │   ├── serde_derive v1.0.219 (proc-macro) (*)
+│   │   │   ├── solana-sdk-ids v2.2.1 (*)
+│   │   │   ├── solana-sdk-macro v2.2.1 (proc-macro) (*)
+│   │   │   └── solana-sysvar-id v2.2.1 (*)
+│   │   ├── solana-example-mocks v2.2.1
+│   │   │   ├── serde v1.0.219 (*)
+│   │   │   ├── serde_derive v1.0.219 (proc-macro) (*)
+│   │   │   ├── solana-address-lookup-table-interface v2.2.2 (*)
+│   │   │   ├── solana-clock v2.2.1 (*)
+│   │   │   ├── solana-hash v2.2.1 (*)
+│   │   │   ├── solana-instruction v2.2.1 (*)
+│   │   │   ├── solana-keccak-hasher v2.2.1
+│   │   │   │   ├── sha3 v0.10.8
+│   │   │   │   │   ├── digest v0.10.7 (*)
+│   │   │   │   │   └── keccak v0.1.5
+│   │   │   │   ├── solana-hash v2.2.1 (*)
+│   │   │   │   └── solana-sanitize v2.2.1
+│   │   │   ├── solana-message v2.2.1
+│   │   │   │   ├── bincode v1.3.3 (*)
+│   │   │   │   ├── blake3 v1.8.2 (*)
+│   │   │   │   ├── lazy_static v1.5.0
+│   │   │   │   ├── serde v1.0.219 (*)
+│   │   │   │   ├── serde_derive v1.0.219 (proc-macro) (*)
+│   │   │   │   ├── solana-bincode v2.2.1 (*)
+│   │   │   │   ├── solana-hash v2.2.1 (*)
+│   │   │   │   ├── solana-instruction v2.2.1 (*)
+│   │   │   │   ├── solana-pubkey v2.2.1 (*)
+│   │   │   │   ├── solana-sanitize v2.2.1
+│   │   │   │   ├── solana-sdk-ids v2.2.1 (*)
+│   │   │   │   ├── solana-short-vec v2.2.1
+│   │   │   │   │   └── serde v1.0.219 (*)
+│   │   │   │   ├── solana-system-interface v1.0.0
+│   │   │   │   │   ├── num-traits v0.2.19 (*)
+│   │   │   │   │   ├── serde v1.0.219 (*)
+│   │   │   │   │   ├── serde_derive v1.0.219 (proc-macro) (*)
+│   │   │   │   │   ├── solana-decode-error v2.2.1 (*)
+│   │   │   │   │   ├── solana-instruction v2.2.1 (*)
+│   │   │   │   │   └── solana-pubkey v2.2.1 (*)
+│   │   │   │   └── solana-transaction-error v2.2.1
+│   │   │   │       ├── serde v1.0.219 (*)
+│   │   │   │       ├── serde_derive v1.0.219 (proc-macro) (*)
+│   │   │   │       ├── solana-instruction v2.2.1 (*)
+│   │   │   │       └── solana-sanitize v2.2.1
+│   │   │   ├── solana-nonce v2.2.1
+│   │   │   │   ├── serde v1.0.219 (*)
+│   │   │   │   ├── serde_derive v1.0.219 (proc-macro) (*)
+│   │   │   │   ├── solana-fee-calculator v2.2.1
+│   │   │   │   │   ├── log v0.4.27
+│   │   │   │   │   ├── serde v1.0.219 (*)
+│   │   │   │   │   └── serde_derive v1.0.219 (proc-macro) (*)
+│   │   │   │   ├── solana-hash v2.2.1 (*)
+│   │   │   │   ├── solana-pubkey v2.2.1 (*)
+│   │   │   │   └── solana-sha256-hasher v2.2.1 (*)
+│   │   │   ├── solana-pubkey v2.2.1 (*)
+│   │   │   ├── solana-sdk-ids v2.2.1 (*)
+│   │   │   ├── solana-system-interface v1.0.0 (*)
+│   │   │   └── thiserror v2.0.12
+│   │   │       └── thiserror-impl v2.0.12 (proc-macro)
+│   │   │           ├── proc-macro2 v1.0.95 (*)
+│   │   │           ├── quote v1.0.40 (*)
+│   │   │           └── syn v2.0.101 (*)
+│   │   ├── solana-feature-gate-interface v2.2.1
+│   │   │   ├── bincode v1.3.3 (*)
+│   │   │   ├── serde v1.0.219 (*)
+│   │   │   ├── serde_derive v1.0.219 (proc-macro) (*)
+│   │   │   ├── solana-account v2.2.1
+│   │   │   │   ├── bincode v1.3.3 (*)
+│   │   │   │   ├── serde v1.0.219 (*)
+│   │   │   │   ├── serde_bytes v0.11.17 (*)
+│   │   │   │   ├── serde_derive v1.0.219 (proc-macro) (*)
+│   │   │   │   ├── solana-account-info v2.2.1 (*)
+│   │   │   │   ├── solana-clock v2.2.1 (*)
+│   │   │   │   ├── solana-instruction v2.2.1 (*)
+│   │   │   │   ├── solana-pubkey v2.2.1 (*)
+│   │   │   │   ├── solana-sdk-ids v2.2.1 (*)
+│   │   │   │   └── solana-sysvar v2.2.1
+│   │   │   │       ├── base64 v0.22.1
+│   │   │   │       ├── bincode v1.3.3 (*)
+│   │   │   │       ├── bytemuck v1.23.0 (*)
+│   │   │   │       ├── bytemuck_derive v1.9.3 (proc-macro) (*)
+│   │   │   │       ├── lazy_static v1.5.0
+│   │   │   │       ├── serde v1.0.219 (*)
+│   │   │   │       ├── serde_derive v1.0.219 (proc-macro) (*)
+│   │   │   │       ├── solana-account-info v2.2.1 (*)
+│   │   │   │       ├── solana-clock v2.2.1 (*)
+│   │   │   │       ├── solana-epoch-rewards v2.2.1 (*)
+│   │   │   │       ├── solana-epoch-schedule v2.2.1 (*)
+│   │   │   │       ├── solana-fee-calculator v2.2.1 (*)
+│   │   │   │       ├── solana-hash v2.2.1 (*)
+│   │   │   │       ├── solana-instruction v2.2.1 (*)
+│   │   │   │       ├── solana-instructions-sysvar v2.2.1
+│   │   │   │       │   ├── bitflags v2.9.0
+│   │   │   │       │   │   └── serde v1.0.219 (*)
+│   │   │   │       │   ├── solana-account-info v2.2.1 (*)
+│   │   │   │       │   ├── solana-instruction v2.2.1 (*)
+│   │   │   │       │   ├── solana-program-error v2.2.1 (*)
+│   │   │   │       │   ├── solana-pubkey v2.2.1 (*)
+│   │   │   │       │   ├── solana-sanitize v2.2.1
+│   │   │   │       │   ├── solana-sdk-ids v2.2.1 (*)
+│   │   │   │       │   ├── solana-serialize-utils v2.2.1
+│   │   │   │       │   │   ├── solana-instruction v2.2.1 (*)
+│   │   │   │       │   │   ├── solana-pubkey v2.2.1 (*)
+│   │   │   │       │   │   └── solana-sanitize v2.2.1
+│   │   │   │       │   └── solana-sysvar-id v2.2.1 (*)
+│   │   │   │       ├── solana-last-restart-slot v2.2.1
+│   │   │   │       │   ├── serde v1.0.219 (*)
+│   │   │   │       │   ├── serde_derive v1.0.219 (proc-macro) (*)
+│   │   │   │       │   ├── solana-sdk-ids v2.2.1 (*)
+│   │   │   │       │   ├── solana-sdk-macro v2.2.1 (proc-macro) (*)
+│   │   │   │       │   └── solana-sysvar-id v2.2.1 (*)
+│   │   │   │       ├── solana-program-entrypoint v2.2.1
+│   │   │   │       │   ├── solana-account-info v2.2.1 (*)
+│   │   │   │       │   ├── solana-msg v2.2.1
+│   │   │   │       │   ├── solana-program-error v2.2.1 (*)
+│   │   │   │       │   └── solana-pubkey v2.2.1 (*)
+│   │   │   │       ├── solana-program-error v2.2.1 (*)
+│   │   │   │       ├── solana-program-memory v2.2.1 (*)
+│   │   │   │       ├── solana-pubkey v2.2.1 (*)
+│   │   │   │       ├── solana-rent v2.2.1
+│   │   │   │       │   ├── serde v1.0.219 (*)
+│   │   │   │       │   ├── serde_derive v1.0.219 (proc-macro) (*)
+│   │   │   │       │   ├── solana-sdk-ids v2.2.1 (*)
+│   │   │   │       │   ├── solana-sdk-macro v2.2.1 (proc-macro) (*)
+│   │   │   │       │   └── solana-sysvar-id v2.2.1 (*)
+│   │   │   │       ├── solana-sanitize v2.2.1
+│   │   │   │       ├── solana-sdk-ids v2.2.1 (*)
+│   │   │   │       ├── solana-sdk-macro v2.2.1 (proc-macro) (*)
+│   │   │   │       ├── solana-slot-hashes v2.2.1 (*)
+│   │   │   │       ├── solana-slot-history v2.2.1
+│   │   │   │       │   ├── bv v0.11.1
+│   │   │   │       │   │   └── serde v1.0.219 (*)
+│   │   │   │       │   │   [build-dependencies]
+│   │   │   │       │   │   └── feature-probe v0.1.1
+│   │   │   │       │   ├── serde v1.0.219 (*)
+│   │   │   │       │   ├── serde_derive v1.0.219 (proc-macro) (*)
+│   │   │   │       │   ├── solana-sdk-ids v2.2.1 (*)
+│   │   │   │       │   └── solana-sysvar-id v2.2.1 (*)
+│   │   │   │       ├── solana-stake-interface v1.2.1
+│   │   │   │       │   ├── borsh v0.10.4 (*)
+│   │   │   │       │   ├── borsh v1.5.7 (*)
+│   │   │   │       │   ├── num-traits v0.2.19 (*)
+│   │   │   │       │   ├── serde v1.0.219 (*)
+│   │   │   │       │   ├── serde_derive v1.0.219 (proc-macro) (*)
+│   │   │   │       │   ├── solana-clock v2.2.1 (*)
+│   │   │   │       │   ├── solana-cpi v2.2.1 (*)
+│   │   │   │       │   ├── solana-decode-error v2.2.1 (*)
+│   │   │   │       │   ├── solana-instruction v2.2.1 (*)
+│   │   │   │       │   ├── solana-program-error v2.2.1 (*)
+│   │   │   │       │   ├── solana-pubkey v2.2.1 (*)
+│   │   │   │       │   ├── solana-system-interface v1.0.0 (*)
+│   │   │   │       │   └── solana-sysvar-id v2.2.1 (*)
+│   │   │   │       └── solana-sysvar-id v2.2.1 (*)
+│   │   │   ├── solana-account-info v2.2.1 (*)
+│   │   │   ├── solana-instruction v2.2.1 (*)
+│   │   │   ├── solana-program-error v2.2.1 (*)
+│   │   │   ├── solana-pubkey v2.2.1 (*)
+│   │   │   ├── solana-rent v2.2.1 (*)
+│   │   │   ├── solana-sdk-ids v2.2.1 (*)
+│   │   │   └── solana-system-interface v1.0.0 (*)
+│   │   ├── solana-fee-calculator v2.2.1 (*)
+│   │   ├── solana-hash v2.2.1 (*)
+│   │   ├── solana-instruction v2.2.1 (*)
+│   │   ├── solana-instructions-sysvar v2.2.1 (*)
+│   │   ├── solana-keccak-hasher v2.2.1 (*)
+│   │   ├── solana-last-restart-slot v2.2.1 (*)
+│   │   ├── solana-loader-v2-interface v2.2.1
+│   │   │   ├── serde v1.0.219 (*)
+│   │   │   ├── serde_bytes v0.11.17 (*)
+│   │   │   ├── serde_derive v1.0.219 (proc-macro) (*)
+│   │   │   ├── solana-instruction v2.2.1 (*)
+│   │   │   ├── solana-pubkey v2.2.1 (*)
+│   │   │   └── solana-sdk-ids v2.2.1 (*)
+│   │   ├── solana-loader-v3-interface v3.0.0
+│   │   │   ├── serde v1.0.219 (*)
+│   │   │   ├── serde_bytes v0.11.17 (*)
+│   │   │   ├── serde_derive v1.0.219 (proc-macro) (*)
+│   │   │   ├── solana-instruction v2.2.1 (*)
+│   │   │   ├── solana-pubkey v2.2.1 (*)
+│   │   │   ├── solana-sdk-ids v2.2.1 (*)
+│   │   │   └── solana-system-interface v1.0.0 (*)
+│   │   ├── solana-loader-v4-interface v2.2.1
+│   │   │   ├── serde v1.0.219 (*)
+│   │   │   ├── serde_bytes v0.11.17 (*)
+│   │   │   ├── serde_derive v1.0.219 (proc-macro) (*)
+│   │   │   ├── solana-instruction v2.2.1 (*)
+│   │   │   ├── solana-pubkey v2.2.1 (*)
+│   │   │   ├── solana-sdk-ids v2.2.1 (*)
+│   │   │   └── solana-system-interface v1.0.0 (*)
+│   │   ├── solana-message v2.2.1 (*)
+│   │   ├── solana-msg v2.2.1
+│   │   ├── solana-native-token v2.2.1
+│   │   ├── solana-nonce v2.2.1 (*)
+│   │   ├── solana-program-entrypoint v2.2.1 (*)
+│   │   ├── solana-program-error v2.2.1 (*)
+│   │   ├── solana-program-memory v2.2.1 (*)
+│   │   ├── solana-program-option v2.2.1
+│   │   ├── solana-program-pack v2.2.1
+│   │   │   └── solana-program-error v2.2.1 (*)
+│   │   ├── solana-pubkey v2.2.1 (*)
+│   │   ├── solana-rent v2.2.1 (*)
+│   │   ├── solana-sanitize v2.2.1
+│   │   ├── solana-sdk-ids v2.2.1 (*)
+│   │   ├── solana-sdk-macro v2.2.1 (proc-macro) (*)
+│   │   ├── solana-secp256k1-recover v2.2.1
+│   │   │   ├── borsh v1.5.7 (*)
+│   │   │   ├── libsecp256k1 v0.6.0
+│   │   │   │   ├── arrayref v0.3.9
+│   │   │   │   ├── base64 v0.12.3
+│   │   │   │   ├── digest v0.9.0
+│   │   │   │   │   └── generic-array v0.14.7 (*)
+│   │   │   │   ├── hmac-drbg v0.3.0
+│   │   │   │   │   ├── digest v0.9.0 (*)
+│   │   │   │   │   ├── generic-array v0.14.7 (*)
+│   │   │   │   │   └── hmac v0.8.1
+│   │   │   │   │       ├── crypto-mac v0.8.0
+│   │   │   │   │       │   ├── generic-array v0.14.7 (*)
+│   │   │   │   │       │   └── subtle v2.6.1
+│   │   │   │   │       └── digest v0.9.0 (*)
+│   │   │   │   ├── libsecp256k1-core v0.2.2
+│   │   │   │   │   ├── crunchy v0.2.3
+│   │   │   │   │   ├── digest v0.9.0 (*)
+│   │   │   │   │   └── subtle v2.6.1
+│   │   │   │   ├── rand v0.7.3
+│   │   │   │   │   ├── getrandom v0.1.16
+│   │   │   │   │   │   ├── cfg-if v1.0.0
+│   │   │   │   │   │   └── libc v0.2.172
+│   │   │   │   │   ├── libc v0.2.172
+│   │   │   │   │   ├── rand_chacha v0.2.2
+│   │   │   │   │   │   ├── ppv-lite86 v0.2.21 (*)
+│   │   │   │   │   │   └── rand_core v0.5.1
+│   │   │   │   │   │       └── getrandom v0.1.16 (*)
+│   │   │   │   │   └── rand_core v0.5.1 (*)
+│   │   │   │   ├── serde v1.0.219 (*)
+│   │   │   │   ├── sha2 v0.9.9
+│   │   │   │   │   ├── block-buffer v0.9.0
+│   │   │   │   │   │   └── generic-array v0.14.7 (*)
+│   │   │   │   │   ├── cfg-if v1.0.0
+│   │   │   │   │   ├── digest v0.9.0 (*)
+│   │   │   │   │   └── opaque-debug v0.3.1
+│   │   │   │   └── typenum v1.18.0
+│   │   │   │   [build-dependencies]
+│   │   │   │   ├── libsecp256k1-gen-ecmult v0.2.1
+│   │   │   │   │   └── libsecp256k1-core v0.2.2
+│   │   │   │   │       ├── crunchy v0.2.3
+│   │   │   │   │       ├── digest v0.9.0
+│   │   │   │   │       │   └── generic-array v0.14.7 (*)
+│   │   │   │   │       └── subtle v2.6.1
+│   │   │   │   └── libsecp256k1-gen-genmult v0.2.1
+│   │   │   │       └── libsecp256k1-core v0.2.2 (*)
+│   │   │   └── thiserror v2.0.12 (*)
+│   │   ├── solana-serde-varint v2.2.1
+│   │   │   └── serde v1.0.219 (*)
+│   │   ├── solana-serialize-utils v2.2.1 (*)
+│   │   ├── solana-sha256-hasher v2.2.1 (*)
+│   │   ├── solana-short-vec v2.2.1 (*)
+│   │   ├── solana-slot-hashes v2.2.1 (*)
+│   │   ├── solana-slot-history v2.2.1 (*)
+│   │   ├── solana-stable-layout v2.2.1
+│   │   │   ├── solana-instruction v2.2.1 (*)
+│   │   │   └── solana-pubkey v2.2.1 (*)
+│   │   ├── solana-stake-interface v1.2.1 (*)
+│   │   ├── solana-system-interface v1.0.0 (*)
+│   │   ├── solana-sysvar v2.2.1 (*)
+│   │   ├── solana-sysvar-id v2.2.1 (*)
+│   │   ├── solana-vote-interface v2.2.4
+│   │   │   ├── bincode v1.3.3 (*)
+│   │   │   ├── num-derive v0.4.2 (proc-macro) (*)
+│   │   │   ├── num-traits v0.2.19 (*)
+│   │   │   ├── serde v1.0.219 (*)
+│   │   │   ├── serde_derive v1.0.219 (proc-macro) (*)
+│   │   │   ├── solana-clock v2.2.1 (*)
+│   │   │   ├── solana-decode-error v2.2.1 (*)
+│   │   │   ├── solana-hash v2.2.1 (*)
+│   │   │   ├── solana-instruction v2.2.1 (*)
+│   │   │   ├── solana-pubkey v2.2.1 (*)
+│   │   │   ├── solana-rent v2.2.1 (*)
+│   │   │   ├── solana-sdk-ids v2.2.1 (*)
+│   │   │   ├── solana-serde-varint v2.2.1 (*)
+│   │   │   ├── solana-serialize-utils v2.2.1 (*)
+│   │   │   ├── solana-short-vec v2.2.1 (*)
+│   │   │   └── solana-system-interface v1.0.0 (*)
+│   │   └── thiserror v2.0.12 (*)
+│   └── thiserror v1.0.69
+│       └── thiserror-impl v1.0.69 (proc-macro) (*)
+├── blake3 v1.8.2 (*)
+├── borsh v0.10.4 (*)
+├── libc v0.2.172
+├── serde v1.0.219 (*)
+├── solana-client v2.2.7
+│   ├── async-trait v0.1.88 (proc-macro)
+│   │   ├── proc-macro2 v1.0.95 (*)
+│   │   ├── quote v1.0.40 (*)
+│   │   └── syn v2.0.101 (*)
+│   ├── bincode v1.3.3 (*)
+│   ├── dashmap v5.5.3
+│   │   ├── cfg-if v1.0.0
+│   │   ├── hashbrown v0.14.5
+│   │   ├── lock_api v0.4.12 (*)
+│   │   ├── once_cell v1.21.3
+│   │   └── parking_lot_core v0.9.10 (*)
+│   ├── futures v0.3.31
+│   │   ├── futures-channel v0.3.31
+│   │   │   ├── futures-core v0.3.31
+│   │   │   └── futures-sink v0.3.31
+│   │   ├── futures-core v0.3.31
+│   │   ├── futures-executor v0.3.31
+│   │   │   ├── futures-core v0.3.31
+│   │   │   ├── futures-task v0.3.31
+│   │   │   └── futures-util v0.3.31
+│   │   │       ├── futures-channel v0.3.31 (*)
+│   │   │       ├── futures-core v0.3.31
+│   │   │       ├── futures-io v0.3.31
+│   │   │       ├── futures-macro v0.3.31 (proc-macro)
+│   │   │       │   ├── proc-macro2 v1.0.95 (*)
+│   │   │       │   ├── quote v1.0.40 (*)
+│   │   │       │   └── syn v2.0.101 (*)
+│   │   │       ├── futures-sink v0.3.31
+│   │   │       ├── futures-task v0.3.31
+│   │   │       ├── memchr v2.7.4
+│   │   │       ├── pin-project-lite v0.2.16
+│   │   │       ├── pin-utils v0.1.0
+│   │   │       └── slab v0.4.9
+│   │   │           [build-dependencies]
+│   │   │           └── autocfg v1.4.0
+│   │   ├── futures-io v0.3.31
+│   │   ├── futures-sink v0.3.31
+│   │   ├── futures-task v0.3.31
+│   │   └── futures-util v0.3.31 (*)
+│   ├── futures-util v0.3.31 (*)
+│   ├── indexmap v2.9.0
+│   │   ├── equivalent v1.0.2
+│   │   └── hashbrown v0.15.3
+│   ├── indicatif v0.17.11
+│   │   ├── console v0.15.11
+│   │   │   ├── libc v0.2.172
+│   │   │   ├── once_cell v1.21.3
+│   │   │   └── unicode-width v0.2.0
+│   │   ├── number_prefix v0.4.0
+│   │   ├── portable-atomic v1.11.0
+│   │   └── unicode-width v0.2.0
+│   ├── log v0.4.27
+│   ├── quinn v0.11.7
+│   │   ├── bytes v1.10.1
+│   │   ├── pin-project-lite v0.2.16
+│   │   ├── quinn-proto v0.11.11
+│   │   │   ├── bytes v1.10.1
+│   │   │   ├── rand v0.9.1
+│   │   │   │   ├── rand_chacha v0.9.0
+│   │   │   │   │   ├── ppv-lite86 v0.2.21 (*)
+│   │   │   │   │   └── rand_core v0.9.3
+│   │   │   │   │       └── getrandom v0.3.2
+│   │   │   │   │           ├── cfg-if v1.0.0
+│   │   │   │   │           └── libc v0.2.172
+│   │   │   │   └── rand_core v0.9.3 (*)
+│   │   │   ├── ring v0.17.14
+│   │   │   │   ├── cfg-if v1.0.0
+│   │   │   │   ├── getrandom v0.2.16 (*)
+│   │   │   │   ├── libc v0.2.172
+│   │   │   │   └── untrusted v0.9.0
+│   │   │   │   [build-dependencies]
+│   │   │   │   └── cc v1.2.21 (*)
+│   │   │   ├── rustc-hash v2.1.1
+│   │   │   ├── rustls v0.23.26
+│   │   │   │   ├── once_cell v1.21.3
+│   │   │   │   ├── ring v0.17.14 (*)
+│   │   │   │   ├── rustls-pki-types v1.11.0
+│   │   │   │   ├── rustls-webpki v0.103.1
+│   │   │   │   │   ├── ring v0.17.14 (*)
+│   │   │   │   │   ├── rustls-pki-types v1.11.0
+│   │   │   │   │   └── untrusted v0.9.0
+│   │   │   │   ├── subtle v2.6.1
+│   │   │   │   └── zeroize v1.8.1 (*)
+│   │   │   ├── rustls-platform-verifier v0.5.2
+│   │   │   │   ├── jni v0.21.1
+│   │   │   │   │   ├── cesu8 v1.1.0
+│   │   │   │   │   ├── cfg-if v1.0.0
+│   │   │   │   │   ├── combine v4.6.7
+│   │   │   │   │   │   ├── bytes v1.10.1
+│   │   │   │   │   │   └── memchr v2.7.4
+│   │   │   │   │   ├── jni-sys v0.3.0
+│   │   │   │   │   ├── log v0.4.27
+│   │   │   │   │   └── thiserror v1.0.69 (*)
+│   │   │   │   │   [build-dependencies]
+│   │   │   │   │   └── walkdir v2.5.0
+│   │   │   │   │       └── same-file v1.0.6
+│   │   │   │   ├── log v0.4.27
+│   │   │   │   ├── once_cell v1.21.3
+│   │   │   │   ├── rustls v0.23.26 (*)
+│   │   │   │   ├── rustls-platform-verifier-android v0.1.1
+│   │   │   │   └── rustls-webpki v0.103.1 (*)
+│   │   │   ├── slab v0.4.9 (*)
+│   │   │   ├── thiserror v2.0.12 (*)
+│   │   │   ├── tinyvec v1.9.0
+│   │   │   │   └── tinyvec_macros v0.1.1
+│   │   │   └── tracing v0.1.41
+│   │   │       ├── log v0.4.27
+│   │   │       ├── pin-project-lite v0.2.16
+│   │   │       └── tracing-core v0.1.33
+│   │   │           └── once_cell v1.21.3
+│   │   ├── quinn-udp v0.5.12
+│   │   │   ├── libc v0.2.172
+│   │   │   ├── socket2 v0.5.9
+│   │   │   │   └── libc v0.2.172
+│   │   │   └── tracing v0.1.41 (*)
+│   │   │   [build-dependencies]
+│   │   │   └── cfg_aliases v0.2.1
+│   │   ├── rustc-hash v2.1.1
+│   │   ├── rustls v0.23.26 (*)
+│   │   ├── socket2 v0.5.9 (*)
+│   │   ├── thiserror v2.0.12 (*)
+│   │   ├── tokio v1.44.2
+│   │   │   ├── bytes v1.10.1
+│   │   │   ├── libc v0.2.172
+│   │   │   ├── mio v1.0.3
+│   │   │   │   └── libc v0.2.172
+│   │   │   ├── parking_lot v0.12.3 (*)
+│   │   │   ├── pin-project-lite v0.2.16
+│   │   │   ├── signal-hook-registry v1.4.5
+│   │   │   │   └── libc v0.2.172
+│   │   │   ├── socket2 v0.5.9 (*)
+│   │   │   └── tokio-macros v2.5.0 (proc-macro)
+│   │   │       ├── proc-macro2 v1.0.95 (*)
+│   │   │       ├── quote v1.0.40 (*)
+│   │   │       └── syn v2.0.101 (*)
+│   │   └── tracing v0.1.41 (*)
+│   │   [build-dependencies]
+│   │   └── cfg_aliases v0.2.1
+│   ├── rayon v1.10.0
+│   │   ├── either v1.15.0
+│   │   └── rayon-core v1.12.1
+│   │       ├── crossbeam-deque v0.8.6
+│   │       │   ├── crossbeam-epoch v0.9.18
+│   │       │   │   └── crossbeam-utils v0.8.21
+│   │       │   └── crossbeam-utils v0.8.21
+│   │       └── crossbeam-utils v0.8.21
+│   ├── solana-account v2.2.1 (*)
+│   ├── solana-client-traits v2.2.1
+│   │   ├── solana-account v2.2.1 (*)
+│   │   ├── solana-commitment-config v2.2.1
+│   │   │   ├── serde v1.0.219 (*)
+│   │   │   └── serde_derive v1.0.219 (proc-macro) (*)
+│   │   ├── solana-epoch-info v2.2.1
+│   │   │   ├── serde v1.0.219 (*)
+│   │   │   └── serde_derive v1.0.219 (proc-macro) (*)
+│   │   ├── solana-hash v2.2.1 (*)
+│   │   ├── solana-instruction v2.2.1 (*)
+│   │   ├── solana-keypair v2.2.1
+│   │   │   ├── bs58 v0.5.1
+│   │   │   ├── ed25519-dalek v1.0.1
+│   │   │   │   ├── curve25519-dalek v3.2.0
+│   │   │   │   │   ├── byteorder v1.5.0
+│   │   │   │   │   ├── digest v0.9.0 (*)
+│   │   │   │   │   ├── rand_core v0.5.1 (*)
+│   │   │   │   │   ├── subtle v2.6.1
+│   │   │   │   │   └── zeroize v1.8.1 (*)
+│   │   │   │   ├── ed25519 v1.5.3
+│   │   │   │   │   └── signature v1.6.4
+│   │   │   │   ├── rand v0.7.3 (*)
+│   │   │   │   ├── serde v1.0.219 (*)
+│   │   │   │   ├── sha2 v0.9.9 (*)
+│   │   │   │   └── zeroize v1.8.1 (*)
+│   │   │   ├── ed25519-dalek-bip32 v0.2.0
+│   │   │   │   ├── derivation-path v0.2.0
+│   │   │   │   ├── ed25519-dalek v1.0.1 (*)
+│   │   │   │   ├── hmac v0.12.1
+│   │   │   │   │   └── digest v0.10.7 (*)
+│   │   │   │   └── sha2 v0.10.9 (*)
+│   │   │   ├── rand v0.7.3 (*)
+│   │   │   ├── solana-derivation-path v2.2.1
+│   │   │   │   ├── derivation-path v0.2.0
+│   │   │   │   ├── qstring v0.7.2
+│   │   │   │   │   └── percent-encoding v2.3.1
+│   │   │   │   └── uriparse v0.6.4
+│   │   │   │       ├── fnv v1.0.7
+│   │   │   │       └── lazy_static v1.5.0
+│   │   │   ├── solana-pubkey v2.2.1 (*)
+│   │   │   ├── solana-seed-derivable v2.2.1
+│   │   │   │   └── solana-derivation-path v2.2.1 (*)
+│   │   │   ├── solana-seed-phrase v2.2.1
+│   │   │   │   ├── hmac v0.12.1 (*)
+│   │   │   │   ├── pbkdf2 v0.11.0
+│   │   │   │   │   └── digest v0.10.7 (*)
+│   │   │   │   └── sha2 v0.10.9 (*)
+│   │   │   ├── solana-signature v2.2.1
+│   │   │   │   ├── bs58 v0.5.1
+│   │   │   │   ├── ed25519-dalek v1.0.1 (*)
+│   │   │   │   ├── rand v0.8.5 (*)
+│   │   │   │   ├── serde v1.0.219 (*)
+│   │   │   │   ├── serde-big-array v0.5.1
+│   │   │   │   │   └── serde v1.0.219 (*)
+│   │   │   │   ├── serde_derive v1.0.219 (proc-macro) (*)
+│   │   │   │   └── solana-sanitize v2.2.1
+│   │   │   └── solana-signer v2.2.1
+│   │   │       ├── solana-pubkey v2.2.1 (*)
+│   │   │       ├── solana-signature v2.2.1 (*)
+│   │   │       └── solana-transaction-error v2.2.1 (*)
+│   │   ├── solana-message v2.2.1 (*)
+│   │   ├── solana-pubkey v2.2.1 (*)
+│   │   ├── solana-signature v2.2.1 (*)
+│   │   ├── solana-signer v2.2.1 (*)
+│   │   ├── solana-system-interface v1.0.0 (*)
+│   │   ├── solana-transaction v2.2.2
+│   │   │   ├── bincode v1.3.3 (*)
+│   │   │   ├── serde v1.0.219 (*)
+│   │   │   ├── serde_derive v1.0.219 (proc-macro) (*)
+│   │   │   ├── solana-bincode v2.2.1 (*)
+│   │   │   ├── solana-feature-set v2.2.4
+│   │   │   │   ├── ahash v0.8.11 (*)
+│   │   │   │   ├── lazy_static v1.5.0
+│   │   │   │   ├── solana-epoch-schedule v2.2.1 (*)
+│   │   │   │   ├── solana-hash v2.2.1 (*)
+│   │   │   │   ├── solana-pubkey v2.2.1 (*)
+│   │   │   │   └── solana-sha256-hasher v2.2.1 (*)
+│   │   │   ├── solana-hash v2.2.1 (*)
+│   │   │   ├── solana-instruction v2.2.1 (*)
+│   │   │   ├── solana-message v2.2.1 (*)
+│   │   │   ├── solana-precompiles v2.2.1
+│   │   │   │   ├── lazy_static v1.5.0
+│   │   │   │   ├── solana-ed25519-program v2.2.2
+│   │   │   │   │   ├── bytemuck v1.23.0 (*)
+│   │   │   │   │   ├── bytemuck_derive v1.9.3 (proc-macro) (*)
+│   │   │   │   │   ├── ed25519-dalek v1.0.1 (*)
+│   │   │   │   │   ├── solana-feature-set v2.2.4 (*)
+│   │   │   │   │   ├── solana-instruction v2.2.1 (*)
+│   │   │   │   │   ├── solana-precompile-error v2.2.1
+│   │   │   │   │   │   ├── num-traits v0.2.19 (*)
+│   │   │   │   │   │   └── solana-decode-error v2.2.1 (*)
+│   │   │   │   │   └── solana-sdk-ids v2.2.1 (*)
+│   │   │   │   ├── solana-feature-set v2.2.4 (*)
+│   │   │   │   ├── solana-message v2.2.1 (*)
+│   │   │   │   ├── solana-precompile-error v2.2.1 (*)
+│   │   │   │   ├── solana-pubkey v2.2.1 (*)
+│   │   │   │   ├── solana-sdk-ids v2.2.1 (*)
+│   │   │   │   ├── solana-secp256k1-program v2.2.1
+│   │   │   │   │   ├── bincode v1.3.3 (*)
+│   │   │   │   │   ├── digest v0.10.7 (*)
+│   │   │   │   │   ├── libsecp256k1 v0.6.0 (*)
+│   │   │   │   │   ├── serde v1.0.219 (*)
+│   │   │   │   │   ├── serde_derive v1.0.219 (proc-macro) (*)
+│   │   │   │   │   ├── sha3 v0.10.8 (*)
+│   │   │   │   │   ├── solana-feature-set v2.2.4 (*)
+│   │   │   │   │   ├── solana-instruction v2.2.1 (*)
+│   │   │   │   │   ├── solana-precompile-error v2.2.1 (*)
+│   │   │   │   │   └── solana-sdk-ids v2.2.1 (*)
+│   │   │   │   └── solana-secp256r1-program v2.2.2
+│   │   │   │       ├── bytemuck v1.23.0 (*)
+│   │   │   │       ├── openssl v0.10.72
+│   │   │   │       │   ├── bitflags v2.9.0 (*)
+│   │   │   │       │   ├── cfg-if v1.0.0
+│   │   │   │       │   ├── foreign-types v0.3.2
+│   │   │   │       │   │   └── foreign-types-shared v0.1.1
+│   │   │   │       │   ├── libc v0.2.172
+│   │   │   │       │   ├── once_cell v1.21.3
+│   │   │   │       │   ├── openssl-macros v0.1.1 (proc-macro)
+│   │   │   │       │   │   ├── proc-macro2 v1.0.95 (*)
+│   │   │   │       │   │   ├── quote v1.0.40 (*)
+│   │   │   │       │   │   └── syn v2.0.101 (*)
+│   │   │   │       │   └── openssl-sys v0.9.108
+│   │   │   │       │       └── libc v0.2.172
+│   │   │   │       │       [build-dependencies]
+│   │   │   │       │       ├── cc v1.2.21 (*)
+│   │   │   │       │       ├── pkg-config v0.3.32
+│   │   │   │       │       └── vcpkg v0.2.15
+│   │   │   │       ├── solana-feature-set v2.2.4 (*)
+│   │   │   │       ├── solana-instruction v2.2.1 (*)
+│   │   │   │       ├── solana-precompile-error v2.2.1 (*)
+│   │   │   │       └── solana-sdk-ids v2.2.1 (*)
+│   │   │   ├── solana-pubkey v2.2.1 (*)
+│   │   │   ├── solana-sanitize v2.2.1
+│   │   │   ├── solana-sdk-ids v2.2.1 (*)
+│   │   │   ├── solana-short-vec v2.2.1 (*)
+│   │   │   ├── solana-signature v2.2.1 (*)
+│   │   │   ├── solana-signer v2.2.1 (*)
+│   │   │   ├── solana-system-interface v1.0.0 (*)
+│   │   │   └── solana-transaction-error v2.2.1 (*)
+│   │   └── solana-transaction-error v2.2.1 (*)
+│   ├── solana-commitment-config v2.2.1 (*)
+│   ├── solana-connection-cache v2.2.7
+│   │   ├── async-trait v0.1.88 (proc-macro) (*)
+│   │   ├── bincode v1.3.3 (*)
+│   │   ├── crossbeam-channel v0.5.15
+│   │   │   └── crossbeam-utils v0.8.21
+│   │   ├── futures-util v0.3.31 (*)
+│   │   ├── indexmap v2.9.0 (*)
+│   │   ├── log v0.4.27
+│   │   ├── rand v0.8.5 (*)
+│   │   ├── rayon v1.10.0 (*)
+│   │   ├── solana-keypair v2.2.1 (*)
+│   │   ├── solana-measure v2.2.7
+│   │   ├── solana-metrics v2.2.7
+│   │   │   ├── crossbeam-channel v0.5.15 (*)
+│   │   │   ├── gethostname v0.2.3
+│   │   │   │   └── libc v0.2.172
+│   │   │   ├── lazy_static v1.5.0
+│   │   │   ├── log v0.4.27
+│   │   │   ├── reqwest v0.11.27
+│   │   │   │   ├── async-compression v0.4.23
+│   │   │   │   │   ├── brotli v8.0.0
+│   │   │   │   │   │   ├── alloc-no-stdlib v2.0.4
+│   │   │   │   │   │   ├── alloc-stdlib v0.2.2
+│   │   │   │   │   │   │   └── alloc-no-stdlib v2.0.4
+│   │   │   │   │   │   └── brotli-decompressor v5.0.0
+│   │   │   │   │   │       ├── alloc-no-stdlib v2.0.4
+│   │   │   │   │   │       └── alloc-stdlib v0.2.2 (*)
+│   │   │   │   │   ├── flate2 v1.1.1
+│   │   │   │   │   │   ├── crc32fast v1.4.2
+│   │   │   │   │   │   │   └── cfg-if v1.0.0
+│   │   │   │   │   │   └── miniz_oxide v0.8.8
+│   │   │   │   │   │       └── adler2 v2.0.0
+│   │   │   │   │   ├── futures-core v0.3.31
+│   │   │   │   │   ├── memchr v2.7.4
+│   │   │   │   │   ├── pin-project-lite v0.2.16
+│   │   │   │   │   └── tokio v1.44.2 (*)
+│   │   │   │   ├── base64 v0.21.7
+│   │   │   │   ├── bytes v1.10.1
+│   │   │   │   ├── encoding_rs v0.8.35
+│   │   │   │   │   └── cfg-if v1.0.0
+│   │   │   │   ├── futures-core v0.3.31
+│   │   │   │   ├── futures-util v0.3.31 (*)
+│   │   │   │   ├── h2 v0.3.26
+│   │   │   │   │   ├── bytes v1.10.1
+│   │   │   │   │   ├── fnv v1.0.7
+│   │   │   │   │   ├── futures-core v0.3.31
+│   │   │   │   │   ├── futures-sink v0.3.31
+│   │   │   │   │   ├── futures-util v0.3.31 (*)
+│   │   │   │   │   ├── http v0.2.12
+│   │   │   │   │   │   ├── bytes v1.10.1
+│   │   │   │   │   │   ├── fnv v1.0.7
+│   │   │   │   │   │   └── itoa v1.0.15
+│   │   │   │   │   ├── indexmap v2.9.0 (*)
+│   │   │   │   │   ├── slab v0.4.9 (*)
+│   │   │   │   │   ├── tokio v1.44.2 (*)
+│   │   │   │   │   ├── tokio-util v0.7.15
+│   │   │   │   │   │   ├── bytes v1.10.1
+│   │   │   │   │   │   ├── futures-core v0.3.31
+│   │   │   │   │   │   ├── futures-sink v0.3.31
+│   │   │   │   │   │   ├── pin-project-lite v0.2.16
+│   │   │   │   │   │   └── tokio v1.44.2 (*)
+│   │   │   │   │   └── tracing v0.1.41 (*)
+│   │   │   │   ├── http v0.2.12 (*)
+│   │   │   │   ├── http-body v0.4.6
+│   │   │   │   │   ├── bytes v1.10.1
+│   │   │   │   │   ├── http v0.2.12 (*)
+│   │   │   │   │   └── pin-project-lite v0.2.16
+│   │   │   │   ├── hyper v0.14.32
+│   │   │   │   │   ├── bytes v1.10.1
+│   │   │   │   │   ├── futures-channel v0.3.31 (*)
+│   │   │   │   │   ├── futures-core v0.3.31
+│   │   │   │   │   ├── futures-util v0.3.31 (*)
+│   │   │   │   │   ├── h2 v0.3.26 (*)
+│   │   │   │   │   ├── http v0.2.12 (*)
+│   │   │   │   │   ├── http-body v0.4.6 (*)
+│   │   │   │   │   ├── httparse v1.10.1
+│   │   │   │   │   ├── httpdate v1.0.3
+│   │   │   │   │   ├── itoa v1.0.15
+│   │   │   │   │   ├── pin-project-lite v0.2.16
+│   │   │   │   │   ├── socket2 v0.5.9 (*)
+│   │   │   │   │   ├── tokio v1.44.2 (*)
+│   │   │   │   │   ├── tower-service v0.3.3
+│   │   │   │   │   ├── tracing v0.1.41 (*)
+│   │   │   │   │   └── want v0.3.1
+│   │   │   │   │       └── try-lock v0.2.5
+│   │   │   │   ├── hyper-rustls v0.24.2
+│   │   │   │   │   ├── futures-util v0.3.31 (*)
+│   │   │   │   │   ├── http v0.2.12 (*)
+│   │   │   │   │   ├── hyper v0.14.32 (*)
+│   │   │   │   │   ├── rustls v0.21.12
+│   │   │   │   │   │   ├── log v0.4.27
+│   │   │   │   │   │   ├── ring v0.17.14 (*)
+│   │   │   │   │   │   ├── rustls-webpki v0.101.7
+│   │   │   │   │   │   │   ├── ring v0.17.14 (*)
+│   │   │   │   │   │   │   └── untrusted v0.9.0
+│   │   │   │   │   │   └── sct v0.7.1
+│   │   │   │   │   │       ├── ring v0.17.14 (*)
+│   │   │   │   │   │       └── untrusted v0.9.0
+│   │   │   │   │   ├── tokio v1.44.2 (*)
+│   │   │   │   │   └── tokio-rustls v0.24.1
+│   │   │   │   │       ├── rustls v0.21.12 (*)
+│   │   │   │   │       └── tokio v1.44.2 (*)
+│   │   │   │   ├── ipnet v2.11.0
+│   │   │   │   ├── log v0.4.27
+│   │   │   │   ├── mime v0.3.17
+│   │   │   │   ├── mime_guess v2.0.5
+│   │   │   │   │   ├── mime v0.3.17
+│   │   │   │   │   └── unicase v2.8.1
+│   │   │   │   │   [build-dependencies]
+│   │   │   │   │   └── unicase v2.8.1
+│   │   │   │   ├── once_cell v1.21.3
+│   │   │   │   ├── percent-encoding v2.3.1
+│   │   │   │   ├── pin-project-lite v0.2.16
+│   │   │   │   ├── rustls v0.21.12 (*)
+│   │   │   │   ├── rustls-pemfile v1.0.4
+│   │   │   │   │   └── base64 v0.21.7
+│   │   │   │   ├── serde v1.0.219 (*)
+│   │   │   │   ├── serde_json v1.0.140
+│   │   │   │   │   ├── itoa v1.0.15
+│   │   │   │   │   ├── memchr v2.7.4
+│   │   │   │   │   ├── ryu v1.0.20
+│   │   │   │   │   └── serde v1.0.219 (*)
+│   │   │   │   ├── serde_urlencoded v0.7.1
+│   │   │   │   │   ├── form_urlencoded v1.2.1
+│   │   │   │   │   │   └── percent-encoding v2.3.1
+│   │   │   │   │   ├── itoa v1.0.15
+│   │   │   │   │   ├── ryu v1.0.20
+│   │   │   │   │   └── serde v1.0.219 (*)
+│   │   │   │   ├── sync_wrapper v0.1.2
+│   │   │   │   ├── tokio v1.44.2 (*)
+│   │   │   │   ├── tokio-rustls v0.24.1 (*)
+│   │   │   │   ├── tokio-util v0.7.15 (*)
+│   │   │   │   ├── tower-service v0.3.3
+│   │   │   │   ├── url v2.5.4
+│   │   │   │   │   ├── form_urlencoded v1.2.1 (*)
+│   │   │   │   │   ├── idna v1.0.3
+│   │   │   │   │   │   ├── idna_adapter v1.2.0
+│   │   │   │   │   │   │   ├── icu_normalizer v1.5.0
+│   │   │   │   │   │   │   │   ├── displaydoc v0.2.5 (proc-macro)
+│   │   │   │   │   │   │   │   │   ├── proc-macro2 v1.0.95 (*)
+│   │   │   │   │   │   │   │   │   ├── quote v1.0.40 (*)
+│   │   │   │   │   │   │   │   │   └── syn v2.0.101 (*)
+│   │   │   │   │   │   │   │   ├── icu_collections v1.5.0
+│   │   │   │   │   │   │   │   │   ├── displaydoc v0.2.5 (proc-macro) (*)
+│   │   │   │   │   │   │   │   │   ├── yoke v0.7.5
+│   │   │   │   │   │   │   │   │   │   ├── stable_deref_trait v1.2.0
+│   │   │   │   │   │   │   │   │   │   ├── yoke-derive v0.7.5 (proc-macro)
+│   │   │   │   │   │   │   │   │   │   │   ├── proc-macro2 v1.0.95 (*)
+│   │   │   │   │   │   │   │   │   │   │   ├── quote v1.0.40 (*)
+│   │   │   │   │   │   │   │   │   │   │   ├── syn v2.0.101 (*)
+│   │   │   │   │   │   │   │   │   │   │   └── synstructure v0.13.2
+│   │   │   │   │   │   │   │   │   │   │       ├── proc-macro2 v1.0.95 (*)
+│   │   │   │   │   │   │   │   │   │   │       ├── quote v1.0.40 (*)
+│   │   │   │   │   │   │   │   │   │   │       └── syn v2.0.101 (*)
+│   │   │   │   │   │   │   │   │   │   └── zerofrom v0.1.6
+│   │   │   │   │   │   │   │   │   │       └── zerofrom-derive v0.1.6 (proc-macro)
+│   │   │   │   │   │   │   │   │   │           ├── proc-macro2 v1.0.95 (*)
+│   │   │   │   │   │   │   │   │   │           ├── quote v1.0.40 (*)
+│   │   │   │   │   │   │   │   │   │           ├── syn v2.0.101 (*)
+│   │   │   │   │   │   │   │   │   │           └── synstructure v0.13.2 (*)
+│   │   │   │   │   │   │   │   │   ├── zerofrom v0.1.6 (*)
+│   │   │   │   │   │   │   │   │   └── zerovec v0.10.4
+│   │   │   │   │   │   │   │   │       ├── yoke v0.7.5 (*)
+│   │   │   │   │   │   │   │   │       ├── zerofrom v0.1.6 (*)
+│   │   │   │   │   │   │   │   │       └── zerovec-derive v0.10.3 (proc-macro)
+│   │   │   │   │   │   │   │   │           ├── proc-macro2 v1.0.95 (*)
+│   │   │   │   │   │   │   │   │           ├── quote v1.0.40 (*)
+│   │   │   │   │   │   │   │   │           └── syn v2.0.101 (*)
+│   │   │   │   │   │   │   │   ├── icu_normalizer_data v1.5.1
+│   │   │   │   │   │   │   │   ├── icu_properties v1.5.1
+│   │   │   │   │   │   │   │   │   ├── displaydoc v0.2.5 (proc-macro) (*)
+│   │   │   │   │   │   │   │   │   ├── icu_collections v1.5.0 (*)
+│   │   │   │   │   │   │   │   │   ├── icu_locid_transform v1.5.0
+│   │   │   │   │   │   │   │   │   │   ├── displaydoc v0.2.5 (proc-macro) (*)
+│   │   │   │   │   │   │   │   │   │   ├── icu_locid v1.5.0
+│   │   │   │   │   │   │   │   │   │   │   ├── displaydoc v0.2.5 (proc-macro) (*)
+│   │   │   │   │   │   │   │   │   │   │   ├── litemap v0.7.5
+│   │   │   │   │   │   │   │   │   │   │   ├── tinystr v0.7.6
+│   │   │   │   │   │   │   │   │   │   │   │   ├── displaydoc v0.2.5 (proc-macro) (*)
+│   │   │   │   │   │   │   │   │   │   │   │   └── zerovec v0.10.4 (*)
+│   │   │   │   │   │   │   │   │   │   │   ├── writeable v0.5.5
+│   │   │   │   │   │   │   │   │   │   │   └── zerovec v0.10.4 (*)
+│   │   │   │   │   │   │   │   │   │   ├── icu_locid_transform_data v1.5.1
+│   │   │   │   │   │   │   │   │   │   ├── icu_provider v1.5.0
+│   │   │   │   │   │   │   │   │   │   │   ├── displaydoc v0.2.5 (proc-macro) (*)
+│   │   │   │   │   │   │   │   │   │   │   ├── icu_locid v1.5.0 (*)
+│   │   │   │   │   │   │   │   │   │   │   ├── icu_provider_macros v1.5.0 (proc-macro)
+│   │   │   │   │   │   │   │   │   │   │   │   ├── proc-macro2 v1.0.95 (*)
+│   │   │   │   │   │   │   │   │   │   │   │   ├── quote v1.0.40 (*)
+│   │   │   │   │   │   │   │   │   │   │   │   └── syn v2.0.101 (*)
+│   │   │   │   │   │   │   │   │   │   │   ├── stable_deref_trait v1.2.0
+│   │   │   │   │   │   │   │   │   │   │   ├── tinystr v0.7.6 (*)
+│   │   │   │   │   │   │   │   │   │   │   ├── writeable v0.5.5
+│   │   │   │   │   │   │   │   │   │   │   ├── yoke v0.7.5 (*)
+│   │   │   │   │   │   │   │   │   │   │   ├── zerofrom v0.1.6 (*)
+│   │   │   │   │   │   │   │   │   │   │   └── zerovec v0.10.4 (*)
+│   │   │   │   │   │   │   │   │   │   ├── tinystr v0.7.6 (*)
+│   │   │   │   │   │   │   │   │   │   └── zerovec v0.10.4 (*)
+│   │   │   │   │   │   │   │   │   ├── icu_properties_data v1.5.1
+│   │   │   │   │   │   │   │   │   ├── icu_provider v1.5.0 (*)
+│   │   │   │   │   │   │   │   │   ├── tinystr v0.7.6 (*)
+│   │   │   │   │   │   │   │   │   └── zerovec v0.10.4 (*)
+│   │   │   │   │   │   │   │   ├── icu_provider v1.5.0 (*)
+│   │   │   │   │   │   │   │   ├── smallvec v1.15.0
+│   │   │   │   │   │   │   │   ├── utf16_iter v1.0.5
+│   │   │   │   │   │   │   │   ├── utf8_iter v1.0.4
+│   │   │   │   │   │   │   │   ├── write16 v1.0.0
+│   │   │   │   │   │   │   │   └── zerovec v0.10.4 (*)
+│   │   │   │   │   │   │   └── icu_properties v1.5.1 (*)
+│   │   │   │   │   │   ├── smallvec v1.15.0
+│   │   │   │   │   │   └── utf8_iter v1.0.4
+│   │   │   │   │   └── percent-encoding v2.3.1
+│   │   │   │   └── webpki-roots v0.25.4
+│   │   │   ├── solana-clock v2.2.1 (*)
+│   │   │   ├── solana-cluster-type v2.2.1
+│   │   │   │   ├── serde v1.0.219 (*)
+│   │   │   │   ├── serde_derive v1.0.219 (proc-macro) (*)
+│   │   │   │   └── solana-hash v2.2.1 (*)
+│   │   │   ├── solana-sha256-hasher v2.2.1 (*)
+│   │   │   ├── solana-time-utils v2.2.1
+│   │   │   └── thiserror v2.0.12 (*)
+│   │   ├── solana-net-utils v2.2.7
+│   │   │   ├── anyhow v1.0.98
+│   │   │   ├── bincode v1.3.3 (*)
+│   │   │   ├── bytes v1.10.1
+│   │   │   ├── crossbeam-channel v0.5.15 (*)
+│   │   │   ├── itertools v0.12.1
+│   │   │   │   └── either v1.15.0
+│   │   │   ├── log v0.4.27
+│   │   │   ├── nix v0.29.0
+│   │   │   │   ├── bitflags v2.9.0 (*)
+│   │   │   │   ├── cfg-if v1.0.0
+│   │   │   │   ├── libc v0.2.172
+│   │   │   │   └── memoffset v0.9.1 (*)
+│   │   │   │   [build-dependencies]
+│   │   │   │   └── cfg_aliases v0.2.1
+│   │   │   ├── rand v0.8.5 (*)
+│   │   │   ├── serde v1.0.219 (*)
+│   │   │   ├── serde_derive v1.0.219 (proc-macro) (*)
+│   │   │   ├── socket2 v0.5.9 (*)
+│   │   │   ├── solana-serde v2.2.1
+│   │   │   │   └── serde v1.0.219 (*)
+│   │   │   ├── tokio v1.44.2 (*)
+│   │   │   └── url v2.5.4 (*)
+│   │   ├── solana-time-utils v2.2.1
+│   │   ├── solana-transaction-error v2.2.1 (*)
+│   │   ├── thiserror v2.0.12 (*)
+│   │   └── tokio v1.44.2 (*)
+│   ├── solana-epoch-info v2.2.1 (*)
+│   ├── solana-hash v2.2.1 (*)
+│   ├── solana-instruction v2.2.1 (*)
+│   ├── solana-keypair v2.2.1 (*)
+│   ├── solana-measure v2.2.7
+│   ├── solana-message v2.2.1 (*)
+│   ├── solana-pubkey v2.2.1 (*)
+│   ├── solana-pubsub-client v2.2.7
+│   │   ├── crossbeam-channel v0.5.15 (*)
+│   │   ├── futures-util v0.3.31 (*)
+│   │   ├── log v0.4.27
+│   │   ├── reqwest v0.11.27 (*)
+│   │   ├── semver v1.0.26
+│   │   ├── serde v1.0.219 (*)
+│   │   ├── serde_derive v1.0.219 (proc-macro) (*)
+│   │   ├── serde_json v1.0.140 (*)
+│   │   ├── solana-account-decoder-client-types v2.2.7
+│   │   │   ├── base64 v0.22.1
+│   │   │   ├── bs58 v0.5.1
+│   │   │   ├── serde v1.0.219 (*)
+│   │   │   ├── serde_derive v1.0.219 (proc-macro) (*)
+│   │   │   ├── serde_json v1.0.140 (*)
+│   │   │   ├── solana-account v2.2.1 (*)
+│   │   │   ├── solana-pubkey v2.2.1 (*)
+│   │   │   └── zstd v0.13.3
+│   │   │       └── zstd-safe v7.2.4
+│   │   │           └── zstd-sys v2.0.15+zstd.1.5.7
+│   │   │               [build-dependencies]
+│   │   │               ├── cc v1.2.21 (*)
+│   │   │               └── pkg-config v0.3.32
+│   │   ├── solana-clock v2.2.1 (*)
+│   │   ├── solana-pubkey v2.2.1 (*)
+│   │   ├── solana-rpc-client-api v2.2.7
+│   │   │   ├── anyhow v1.0.98
+│   │   │   ├── base64 v0.22.1
+│   │   │   ├── bs58 v0.5.1
+│   │   │   ├── jsonrpc-core v18.0.0
+│   │   │   │   ├── futures v0.3.31 (*)
+│   │   │   │   ├── futures-executor v0.3.31 (*)
+│   │   │   │   ├── futures-util v0.3.31 (*)
+│   │   │   │   ├── log v0.4.27
+│   │   │   │   ├── serde v1.0.219 (*)
+│   │   │   │   ├── serde_derive v1.0.219 (proc-macro) (*)
+│   │   │   │   └── serde_json v1.0.140 (*)
+│   │   │   ├── reqwest v0.11.27 (*)
+│   │   │   ├── reqwest-middleware v0.2.5
+│   │   │   │   ├── anyhow v1.0.98
+│   │   │   │   ├── async-trait v0.1.88 (proc-macro) (*)
+│   │   │   │   ├── http v0.2.12 (*)
+│   │   │   │   ├── reqwest v0.11.27 (*)
+│   │   │   │   ├── serde v1.0.219 (*)
+│   │   │   │   ├── task-local-extensions v0.1.4
+│   │   │   │   │   └── pin-utils v0.1.0
+│   │   │   │   └── thiserror v1.0.69 (*)
+│   │   │   ├── semver v1.0.26
+│   │   │   ├── serde v1.0.219 (*)
+│   │   │   ├── serde_derive v1.0.219 (proc-macro) (*)
+│   │   │   ├── serde_json v1.0.140 (*)
+│   │   │   ├── solana-account v2.2.1 (*)
+│   │   │   ├── solana-account-decoder-client-types v2.2.7 (*)
+│   │   │   ├── solana-clock v2.2.1 (*)
+│   │   │   ├── solana-commitment-config v2.2.1 (*)
+│   │   │   ├── solana-fee-calculator v2.2.1 (*)
+│   │   │   ├── solana-inflation v2.2.1
+│   │   │   │   ├── serde v1.0.219 (*)
+│   │   │   │   └── serde_derive v1.0.219 (proc-macro) (*)
+│   │   │   ├── solana-inline-spl v2.2.7
+│   │   │   │   ├── bytemuck v1.23.0 (*)
+│   │   │   │   └── solana-pubkey v2.2.1 (*)
+│   │   │   ├── solana-pubkey v2.2.1 (*)
+│   │   │   ├── solana-signer v2.2.1 (*)
+│   │   │   ├── solana-transaction-error v2.2.1 (*)
+│   │   │   ├── solana-transaction-status-client-types v2.2.7
+│   │   │   │   ├── base64 v0.22.1
+│   │   │   │   ├── bincode v1.3.3 (*)
+│   │   │   │   ├── bs58 v0.5.1
+│   │   │   │   ├── serde v1.0.219 (*)
+│   │   │   │   ├── serde_derive v1.0.219 (proc-macro) (*)
+│   │   │   │   ├── serde_json v1.0.140 (*)
+│   │   │   │   ├── solana-account-decoder-client-types v2.2.7 (*)
+│   │   │   │   ├── solana-commitment-config v2.2.1 (*)
+│   │   │   │   ├── solana-message v2.2.1 (*)
+│   │   │   │   ├── solana-reward-info v2.2.1
+│   │   │   │   │   ├── serde v1.0.219 (*)
+│   │   │   │   │   └── serde_derive v1.0.219 (proc-macro) (*)
+│   │   │   │   ├── solana-signature v2.2.1 (*)
+│   │   │   │   ├── solana-transaction v2.2.2 (*)
+│   │   │   │   ├── solana-transaction-context v2.2.1
+│   │   │   │   │   ├── bincode v1.3.3 (*)
+│   │   │   │   │   ├── serde v1.0.219 (*)
+│   │   │   │   │   ├── serde_derive v1.0.219 (proc-macro) (*)
+│   │   │   │   │   ├── solana-account v2.2.1 (*)
+│   │   │   │   │   ├── solana-instruction v2.2.1 (*)
+│   │   │   │   │   ├── solana-pubkey v2.2.1 (*)
+│   │   │   │   │   ├── solana-rent v2.2.1 (*)
+│   │   │   │   │   └── solana-signature v2.2.1 (*)
+│   │   │   │   ├── solana-transaction-error v2.2.1 (*)
+│   │   │   │   └── thiserror v2.0.12 (*)
+│   │   │   ├── solana-version v2.2.7
+│   │   │   │   ├── agave-feature-set v2.2.7
+│   │   │   │   │   ├── ahash v0.8.11 (*)
+│   │   │   │   │   ├── solana-epoch-schedule v2.2.1 (*)
+│   │   │   │   │   ├── solana-feature-set-interface v4.0.0
+│   │   │   │   │   │   ├── ahash v0.8.11 (*)
+│   │   │   │   │   │   └── solana-pubkey v2.2.1 (*)
+│   │   │   │   │   ├── solana-hash v2.2.1 (*)
+│   │   │   │   │   ├── solana-pubkey v2.2.1 (*)
+│   │   │   │   │   └── solana-sha256-hasher v2.2.1 (*)
+│   │   │   │   ├── semver v1.0.26
+│   │   │   │   ├── serde v1.0.219 (*)
+│   │   │   │   ├── serde_derive v1.0.219 (proc-macro) (*)
+│   │   │   │   ├── solana-sanitize v2.2.1
+│   │   │   │   └── solana-serde-varint v2.2.1 (*)
+│   │   │   └── thiserror v2.0.12 (*)
+│   │   ├── solana-signature v2.2.1 (*)
+│   │   ├── thiserror v2.0.12 (*)
+│   │   ├── tokio v1.44.2 (*)
+│   │   ├── tokio-stream v0.1.17
+│   │   │   ├── futures-core v0.3.31
+│   │   │   ├── pin-project-lite v0.2.16
+│   │   │   └── tokio v1.44.2 (*)
+│   │   ├── tokio-tungstenite v0.20.1
+│   │   │   ├── futures-util v0.3.31 (*)
+│   │   │   ├── log v0.4.27
+│   │   │   ├── rustls v0.21.12 (*)
+│   │   │   ├── tokio v1.44.2 (*)
+│   │   │   ├── tokio-rustls v0.24.1 (*)
+│   │   │   ├── tungstenite v0.20.1
+│   │   │   │   ├── byteorder v1.5.0
+│   │   │   │   ├── bytes v1.10.1
+│   │   │   │   ├── data-encoding v2.9.0
+│   │   │   │   ├── http v0.2.12 (*)
+│   │   │   │   ├── httparse v1.10.1
+│   │   │   │   ├── log v0.4.27
+│   │   │   │   ├── rand v0.8.5 (*)
+│   │   │   │   ├── rustls v0.21.12 (*)
+│   │   │   │   ├── sha1 v0.10.6
+│   │   │   │   │   ├── cfg-if v1.0.0
+│   │   │   │   │   └── digest v0.10.7 (*)
+│   │   │   │   ├── thiserror v1.0.69 (*)
+│   │   │   │   ├── url v2.5.4 (*)
+│   │   │   │   ├── utf-8 v0.7.6
+│   │   │   │   └── webpki-roots v0.24.0
+│   │   │   │       └── rustls-webpki v0.101.7 (*)
+│   │   │   └── webpki-roots v0.25.4
+│   │   ├── tungstenite v0.20.1 (*)
+│   │   └── url v2.5.4 (*)
+│   ├── solana-quic-client v2.2.7
+│   │   ├── async-lock v3.4.0
+│   │   │   ├── event-listener v5.4.0
+│   │   │   │   ├── concurrent-queue v2.5.0
+│   │   │   │   │   └── crossbeam-utils v0.8.21
+│   │   │   │   ├── parking v2.2.1
+│   │   │   │   └── pin-project-lite v0.2.16
+│   │   │   ├── event-listener-strategy v0.5.4
+│   │   │   │   ├── event-listener v5.4.0 (*)
+│   │   │   │   └── pin-project-lite v0.2.16
+│   │   │   └── pin-project-lite v0.2.16
+│   │   ├── async-trait v0.1.88 (proc-macro) (*)
+│   │   ├── futures v0.3.31 (*)
+│   │   ├── itertools v0.12.1 (*)
+│   │   ├── lazy_static v1.5.0
+│   │   ├── log v0.4.27
+│   │   ├── quinn v0.11.7 (*)
+│   │   ├── quinn-proto v0.11.11 (*)
+│   │   ├── rustls v0.23.26 (*)
+│   │   ├── solana-connection-cache v2.2.7 (*)
+│   │   ├── solana-keypair v2.2.1 (*)
+│   │   ├── solana-measure v2.2.7
+│   │   ├── solana-metrics v2.2.7 (*)
+│   │   ├── solana-net-utils v2.2.7 (*)
+│   │   ├── solana-pubkey v2.2.1 (*)
+│   │   ├── solana-quic-definitions v2.2.1
+│   │   │   └── solana-keypair v2.2.1 (*)
+│   │   ├── solana-rpc-client-api v2.2.7 (*)
+│   │   ├── solana-signer v2.2.1 (*)
+│   │   ├── solana-streamer v2.2.7
+│   │   │   ├── async-channel v1.9.0
+│   │   │   │   ├── concurrent-queue v2.5.0 (*)
+│   │   │   │   ├── event-listener v2.5.3
+│   │   │   │   └── futures-core v0.3.31
+│   │   │   ├── bytes v1.10.1
+│   │   │   ├── crossbeam-channel v0.5.15 (*)
+│   │   │   ├── dashmap v5.5.3 (*)
+│   │   │   ├── futures v0.3.31 (*)
+│   │   │   ├── futures-util v0.3.31 (*)
+│   │   │   ├── governor v0.6.3
+│   │   │   │   ├── cfg-if v1.0.0
+│   │   │   │   ├── dashmap v5.5.3 (*)
+│   │   │   │   ├── futures v0.3.31 (*)
+│   │   │   │   ├── futures-timer v3.0.3
+│   │   │   │   ├── no-std-compat v0.4.1
+│   │   │   │   ├── nonzero_ext v0.3.0
+│   │   │   │   ├── parking_lot v0.12.3 (*)
+│   │   │   │   ├── portable-atomic v1.11.0
+│   │   │   │   ├── quanta v0.12.5
+│   │   │   │   │   ├── crossbeam-utils v0.8.21
+│   │   │   │   │   ├── libc v0.2.172
+│   │   │   │   │   └── once_cell v1.21.3
+│   │   │   │   ├── rand v0.8.5 (*)
+│   │   │   │   ├── smallvec v1.15.0
+│   │   │   │   └── spinning_top v0.3.0
+│   │   │   │       └── lock_api v0.4.12 (*)
+│   │   │   ├── histogram v0.6.9
+│   │   │   ├── indexmap v2.9.0 (*)
+│   │   │   ├── itertools v0.12.1 (*)
+│   │   │   ├── libc v0.2.172
+│   │   │   ├── log v0.4.27
+│   │   │   ├── nix v0.29.0 (*)
+│   │   │   ├── pem v1.1.1
+│   │   │   │   └── base64 v0.13.1
+│   │   │   ├── percentage v0.1.0
+│   │   │   │   └── num v0.2.1
+│   │   │   │       ├── num-bigint v0.2.6
+│   │   │   │       │   ├── num-integer v0.1.46 (*)
+│   │   │   │       │   └── num-traits v0.2.19 (*)
+│   │   │   │       │   [build-dependencies]
+│   │   │   │       │   └── autocfg v1.4.0
+│   │   │   │       ├── num-complex v0.2.4
+│   │   │   │       │   └── num-traits v0.2.19 (*)
+│   │   │   │       │   [build-dependencies]
+│   │   │   │       │   └── autocfg v1.4.0
+│   │   │   │       ├── num-integer v0.1.46 (*)
+│   │   │   │       ├── num-iter v0.1.45
+│   │   │   │       │   ├── num-integer v0.1.46 (*)
+│   │   │   │       │   └── num-traits v0.2.19 (*)
+│   │   │   │       │   [build-dependencies]
+│   │   │   │       │   └── autocfg v1.4.0
+│   │   │   │       ├── num-rational v0.2.4
+│   │   │   │       │   ├── num-bigint v0.2.6 (*)
+│   │   │   │       │   ├── num-integer v0.1.46 (*)
+│   │   │   │       │   └── num-traits v0.2.19 (*)
+│   │   │   │       │   [build-dependencies]
+│   │   │   │       │   └── autocfg v1.4.0
+│   │   │   │       └── num-traits v0.2.19 (*)
+│   │   │   ├── quinn v0.11.7 (*)
+│   │   │   ├── quinn-proto v0.11.11 (*)
+│   │   │   ├── rand v0.8.5 (*)
+│   │   │   ├── rustls v0.23.26 (*)
+│   │   │   ├── smallvec v1.15.0
+│   │   │   ├── socket2 v0.5.9 (*)
+│   │   │   ├── solana-keypair v2.2.1 (*)
+│   │   │   ├── solana-measure v2.2.7
+│   │   │   ├── solana-metrics v2.2.7 (*)
+│   │   │   ├── solana-net-utils v2.2.7 (*)
+│   │   │   ├── solana-packet v2.2.1
+│   │   │   │   ├── bincode v1.3.3 (*)
+│   │   │   │   ├── bitflags v2.9.0 (*)
+│   │   │   │   ├── cfg_eval v0.1.2 (proc-macro)
+│   │   │   │   │   ├── proc-macro2 v1.0.95 (*)
+│   │   │   │   │   ├── quote v1.0.40 (*)
+│   │   │   │   │   └── syn v2.0.101 (*)
+│   │   │   │   ├── serde v1.0.219 (*)
+│   │   │   │   ├── serde_derive v1.0.219 (proc-macro) (*)
+│   │   │   │   └── serde_with v3.12.0
+│   │   │   │       ├── serde v1.0.219 (*)
+│   │   │   │       ├── serde_derive v1.0.219 (proc-macro) (*)
+│   │   │   │       └── serde_with_macros v3.12.0 (proc-macro)
+│   │   │   │           ├── darling v0.20.11
+│   │   │   │           │   ├── darling_core v0.20.11
+│   │   │   │           │   │   ├── fnv v1.0.7
+│   │   │   │           │   │   ├── ident_case v1.0.1
+│   │   │   │           │   │   ├── proc-macro2 v1.0.95 (*)
+│   │   │   │           │   │   ├── quote v1.0.40 (*)
+│   │   │   │           │   │   ├── strsim v0.11.1
+│   │   │   │           │   │   └── syn v2.0.101 (*)
+│   │   │   │           │   └── darling_macro v0.20.11 (proc-macro)
+│   │   │   │           │       ├── darling_core v0.20.11 (*)
+│   │   │   │           │       ├── quote v1.0.40 (*)
+│   │   │   │           │       └── syn v2.0.101 (*)
+│   │   │   │           ├── proc-macro2 v1.0.95 (*)
+│   │   │   │           ├── quote v1.0.40 (*)
+│   │   │   │           └── syn v2.0.101 (*)
+│   │   │   ├── solana-perf v2.2.7
+│   │   │   │   ├── ahash v0.8.11 (*)
+│   │   │   │   ├── bincode v1.3.3 (*)
+│   │   │   │   ├── bv v0.11.1 (*)
+│   │   │   │   ├── curve25519-dalek v4.1.3 (*)
+│   │   │   │   ├── dlopen2 v0.5.0
+│   │   │   │   │   ├── dlopen2_derive v0.3.0 (proc-macro)
+│   │   │   │   │   │   ├── proc-macro2 v1.0.95 (*)
+│   │   │   │   │   │   ├── quote v1.0.40 (*)
+│   │   │   │   │   │   └── syn v2.0.101 (*)
+│   │   │   │   │   ├── libc v0.2.172
+│   │   │   │   │   └── once_cell v1.21.3
+│   │   │   │   ├── fnv v1.0.7
+│   │   │   │   ├── lazy_static v1.5.0
+│   │   │   │   ├── log v0.4.27
+│   │   │   │   ├── rand v0.8.5 (*)
+│   │   │   │   ├── rayon v1.10.0 (*)
+│   │   │   │   ├── serde v1.0.219 (*)
+│   │   │   │   ├── solana-hash v2.2.1 (*)
+│   │   │   │   ├── solana-message v2.2.1 (*)
+│   │   │   │   ├── solana-metrics v2.2.7 (*)
+│   │   │   │   ├── solana-packet v2.2.1 (*)
+│   │   │   │   ├── solana-pubkey v2.2.1 (*)
+│   │   │   │   ├── solana-rayon-threadlimit v2.2.7
+│   │   │   │   │   ├── lazy_static v1.5.0
+│   │   │   │   │   └── num_cpus v1.16.0
+│   │   │   │   │       └── libc v0.2.172
+│   │   │   │   ├── solana-sdk-ids v2.2.1 (*)
+│   │   │   │   ├── solana-short-vec v2.2.1 (*)
+│   │   │   │   ├── solana-signature v2.2.1 (*)
+│   │   │   │   └── solana-time-utils v2.2.1
+│   │   │   ├── solana-pubkey v2.2.1 (*)
+│   │   │   ├── solana-quic-definitions v2.2.1 (*)
+│   │   │   ├── solana-signature v2.2.1 (*)
+│   │   │   ├── solana-signer v2.2.1 (*)
+│   │   │   ├── solana-time-utils v2.2.1
+│   │   │   ├── solana-tls-utils v2.2.7
+│   │   │   │   ├── rustls v0.23.26 (*)
+│   │   │   │   ├── solana-keypair v2.2.1 (*)
+│   │   │   │   ├── solana-pubkey v2.2.1 (*)
+│   │   │   │   ├── solana-signer v2.2.1 (*)
+│   │   │   │   └── x509-parser v0.14.0
+│   │   │   │       ├── asn1-rs v0.5.2
+│   │   │   │       │   ├── asn1-rs-derive v0.4.0 (proc-macro)
+│   │   │   │       │   │   ├── proc-macro2 v1.0.95 (*)
+│   │   │   │       │   │   ├── quote v1.0.40 (*)
+│   │   │   │       │   │   ├── syn v1.0.109 (*)
+│   │   │   │       │   │   └── synstructure v0.12.6
+│   │   │   │       │   │       ├── proc-macro2 v1.0.95 (*)
+│   │   │   │       │   │       ├── quote v1.0.40 (*)
+│   │   │   │       │   │       ├── syn v1.0.109 (*)
+│   │   │   │       │   │       └── unicode-xid v0.2.6
+│   │   │   │       │   ├── asn1-rs-impl v0.1.0 (proc-macro)
+│   │   │   │       │   │   ├── proc-macro2 v1.0.95 (*)
+│   │   │   │       │   │   ├── quote v1.0.40 (*)
+│   │   │   │       │   │   └── syn v1.0.109 (*)
+│   │   │   │       │   ├── displaydoc v0.2.5 (proc-macro) (*)
+│   │   │   │       │   ├── nom v7.1.3
+│   │   │   │       │   │   ├── memchr v2.7.4
+│   │   │   │       │   │   └── minimal-lexical v0.2.1
+│   │   │   │       │   ├── num-traits v0.2.19 (*)
+│   │   │   │       │   ├── rusticata-macros v4.1.0
+│   │   │   │       │   │   └── nom v7.1.3 (*)
+│   │   │   │       │   ├── thiserror v1.0.69 (*)
+│   │   │   │       │   └── time v0.3.41
+│   │   │   │       │       ├── deranged v0.4.0
+│   │   │   │       │       │   └── powerfmt v0.2.0
+│   │   │   │       │       ├── itoa v1.0.15
+│   │   │   │       │       ├── num-conv v0.1.0
+│   │   │   │       │       ├── powerfmt v0.2.0
+│   │   │   │       │       ├── time-core v0.1.4
+│   │   │   │       │       └── time-macros v0.2.22 (proc-macro)
+│   │   │   │       │           ├── num-conv v0.1.0
+│   │   │   │       │           └── time-core v0.1.4
+│   │   │   │       ├── base64 v0.13.1
+│   │   │   │       ├── data-encoding v2.9.0
+│   │   │   │       ├── der-parser v8.2.0
+│   │   │   │       │   ├── asn1-rs v0.5.2 (*)
+│   │   │   │       │   ├── displaydoc v0.2.5 (proc-macro) (*)
+│   │   │   │       │   ├── nom v7.1.3 (*)
+│   │   │   │       │   ├── num-bigint v0.4.6 (*)
+│   │   │   │       │   ├── num-traits v0.2.19 (*)
+│   │   │   │       │   └── rusticata-macros v4.1.0 (*)
+│   │   │   │       ├── lazy_static v1.5.0
+│   │   │   │       ├── nom v7.1.3 (*)
+│   │   │   │       ├── oid-registry v0.6.1
+│   │   │   │       │   └── asn1-rs v0.5.2 (*)
+│   │   │   │       ├── rusticata-macros v4.1.0 (*)
+│   │   │   │       ├── thiserror v1.0.69 (*)
+│   │   │   │       └── time v0.3.41 (*)
+│   │   │   ├── solana-transaction-error v2.2.1 (*)
+│   │   │   ├── solana-transaction-metrics-tracker v2.2.7
+│   │   │   │   ├── base64 v0.22.1
+│   │   │   │   ├── bincode v1.3.3 (*)
+│   │   │   │   ├── lazy_static v1.5.0
+│   │   │   │   ├── log v0.4.27
+│   │   │   │   ├── rand v0.8.5 (*)
+│   │   │   │   ├── solana-packet v2.2.1 (*)
+│   │   │   │   ├── solana-perf v2.2.7 (*)
+│   │   │   │   ├── solana-short-vec v2.2.1 (*)
+│   │   │   │   └── solana-signature v2.2.1 (*)
+│   │   │   ├── thiserror v2.0.12 (*)
+│   │   │   ├── tokio v1.44.2 (*)
+│   │   │   ├── tokio-util v0.7.15 (*)
+│   │   │   └── x509-parser v0.14.0 (*)
+│   │   ├── solana-tls-utils v2.2.7 (*)
+│   │   ├── solana-transaction-error v2.2.1 (*)
+│   │   ├── thiserror v2.0.12 (*)
+│   │   └── tokio v1.44.2 (*)
+│   ├── solana-quic-definitions v2.2.1 (*)
+│   ├── solana-rpc-client v2.2.7
+│   │   ├── async-trait v0.1.88 (proc-macro) (*)
+│   │   ├── base64 v0.22.1
+│   │   ├── bincode v1.3.3 (*)
+│   │   ├── bs58 v0.5.1
+│   │   ├── indicatif v0.17.11 (*)
+│   │   ├── log v0.4.27
+│   │   ├── reqwest v0.11.27 (*)
+│   │   ├── reqwest-middleware v0.2.5 (*)
+│   │   ├── semver v1.0.26
+│   │   ├── serde v1.0.219 (*)
+│   │   ├── serde_derive v1.0.219 (proc-macro) (*)
+│   │   ├── serde_json v1.0.140 (*)
+│   │   ├── solana-account v2.2.1 (*)
+│   │   ├── solana-account-decoder-client-types v2.2.7 (*)
+│   │   ├── solana-clock v2.2.1 (*)
+│   │   ├── solana-commitment-config v2.2.1 (*)
+│   │   ├── solana-epoch-info v2.2.1 (*)
+│   │   ├── solana-epoch-schedule v2.2.1 (*)
+│   │   ├── solana-feature-gate-interface v2.2.1 (*)
+│   │   ├── solana-hash v2.2.1 (*)
+│   │   ├── solana-instruction v2.2.1 (*)
+│   │   ├── solana-message v2.2.1 (*)
+│   │   ├── solana-pubkey v2.2.1 (*)
+│   │   ├── solana-rpc-client-api v2.2.7 (*)
+│   │   ├── solana-signature v2.2.1 (*)
+│   │   ├── solana-transaction v2.2.2 (*)
+│   │   ├── solana-transaction-error v2.2.1 (*)
+│   │   ├── solana-transaction-status-client-types v2.2.7 (*)
+│   │   ├── solana-version v2.2.7 (*)
+│   │   └── tokio v1.44.2 (*)
+│   ├── solana-rpc-client-api v2.2.7 (*)
+│   ├── solana-rpc-client-nonce-utils v2.2.7
+│   │   ├── solana-account v2.2.1 (*)
+│   │   ├── solana-commitment-config v2.2.1 (*)
+│   │   ├── solana-hash v2.2.1 (*)
+│   │   ├── solana-message v2.2.1 (*)
+│   │   ├── solana-nonce v2.2.1 (*)
+│   │   ├── solana-pubkey v2.2.1 (*)
+│   │   ├── solana-rpc-client v2.2.7 (*)
+│   │   ├── solana-sdk-ids v2.2.1 (*)
+│   │   └── thiserror v2.0.12 (*)
+│   ├── solana-signature v2.2.1 (*)
+│   ├── solana-signer v2.2.1 (*)
+│   ├── solana-streamer v2.2.7 (*)
+│   ├── solana-thin-client v2.2.7
+│   │   ├── bincode v1.3.3 (*)
+│   │   ├── log v0.4.27
+│   │   ├── rayon v1.10.0 (*)
+│   │   ├── solana-account v2.2.1 (*)
+│   │   ├── solana-client-traits v2.2.1 (*)
+│   │   ├── solana-clock v2.2.1 (*)
+│   │   ├── solana-commitment-config v2.2.1 (*)
+│   │   ├── solana-connection-cache v2.2.7 (*)
+│   │   ├── solana-epoch-info v2.2.1 (*)
+│   │   ├── solana-hash v2.2.1 (*)
+│   │   ├── solana-instruction v2.2.1 (*)
+│   │   ├── solana-keypair v2.2.1 (*)
+│   │   ├── solana-message v2.2.1 (*)
+│   │   ├── solana-pubkey v2.2.1 (*)
+│   │   ├── solana-rpc-client v2.2.7 (*)
+│   │   ├── solana-rpc-client-api v2.2.7 (*)
+│   │   ├── solana-signature v2.2.1 (*)
+│   │   ├── solana-signer v2.2.1 (*)
+│   │   ├── solana-system-interface v1.0.0 (*)
+│   │   ├── solana-transaction v2.2.2 (*)
+│   │   └── solana-transaction-error v2.2.1 (*)
+│   ├── solana-time-utils v2.2.1
+│   ├── solana-tpu-client v2.2.7
+│   │   ├── async-trait v0.1.88 (proc-macro) (*)
+│   │   ├── bincode v1.3.3 (*)
+│   │   ├── futures-util v0.3.31 (*)
+│   │   ├── indexmap v2.9.0 (*)
+│   │   ├── indicatif v0.17.11 (*)
+│   │   ├── log v0.4.27
+│   │   ├── rayon v1.10.0 (*)
+│   │   ├── solana-client-traits v2.2.1 (*)
+│   │   ├── solana-clock v2.2.1 (*)
+│   │   ├── solana-commitment-config v2.2.1 (*)
+│   │   ├── solana-connection-cache v2.2.7 (*)
+│   │   ├── solana-epoch-info v2.2.1 (*)
+│   │   ├── solana-measure v2.2.7
+│   │   ├── solana-message v2.2.1 (*)
+│   │   ├── solana-net-utils v2.2.7 (*)
+│   │   ├── solana-pubkey v2.2.1 (*)
+│   │   ├── solana-pubsub-client v2.2.7 (*)
+│   │   ├── solana-quic-definitions v2.2.1 (*)
+│   │   ├── solana-rpc-client v2.2.7 (*)
+│   │   ├── solana-rpc-client-api v2.2.7 (*)
+│   │   ├── solana-signature v2.2.1 (*)
+│   │   ├── solana-signer v2.2.1 (*)
+│   │   ├── solana-transaction v2.2.2 (*)
+│   │   ├── solana-transaction-error v2.2.1 (*)
+│   │   ├── thiserror v2.0.12 (*)
+│   │   └── tokio v1.44.2 (*)
+│   ├── solana-transaction v2.2.2 (*)
+│   ├── solana-transaction-error v2.2.1 (*)
+│   ├── solana-udp-client v2.2.7
+│   │   ├── async-trait v0.1.88 (proc-macro) (*)
+│   │   ├── solana-connection-cache v2.2.7 (*)
+│   │   ├── solana-keypair v2.2.1 (*)
+│   │   ├── solana-net-utils v2.2.7 (*)
+│   │   ├── solana-streamer v2.2.7 (*)
+│   │   ├── solana-transaction-error v2.2.1 (*)
+│   │   ├── thiserror v2.0.12 (*)
+│   │   └── tokio v1.44.2 (*)
+│   ├── thiserror v2.0.12 (*)
+│   └── tokio v1.44.2 (*)
+└── solana-sdk v2.2.2
+    ├── bincode v1.3.3 (*)
+    ├── bs58 v0.5.1
+    ├── serde v1.0.219 (*)
+    ├── serde_json v1.0.140 (*)
+    ├── solana-account v2.2.1 (*)
+    ├── solana-bn254 v2.2.2
+    │   ├── ark-bn254 v0.4.0
+    │   │   ├── ark-ec v0.4.2
+    │   │   │   ├── ark-ff v0.4.2
+    │   │   │   │   ├── ark-ff-asm v0.4.2 (proc-macro)
+    │   │   │   │   │   ├── quote v1.0.40 (*)
+    │   │   │   │   │   └── syn v1.0.109 (*)
+    │   │   │   │   ├── ark-ff-macros v0.4.2 (proc-macro)
+    │   │   │   │   │   ├── num-bigint v0.4.6
+    │   │   │   │   │   │   ├── num-integer v0.1.46
+    │   │   │   │   │   │   │   └── num-traits v0.2.19
+    │   │   │   │   │   │   │       [build-dependencies]
+    │   │   │   │   │   │   │       └── autocfg v1.4.0
+    │   │   │   │   │   │   └── num-traits v0.2.19 (*)
+    │   │   │   │   │   ├── num-traits v0.2.19 (*)
+    │   │   │   │   │   ├── proc-macro2 v1.0.95 (*)
+    │   │   │   │   │   ├── quote v1.0.40 (*)
+    │   │   │   │   │   └── syn v1.0.109 (*)
+    │   │   │   │   ├── ark-serialize v0.4.2
+    │   │   │   │   │   ├── ark-serialize-derive v0.4.2 (proc-macro)
+    │   │   │   │   │   │   ├── proc-macro2 v1.0.95 (*)
+    │   │   │   │   │   │   ├── quote v1.0.40 (*)
+    │   │   │   │   │   │   └── syn v1.0.109 (*)
+    │   │   │   │   │   ├── ark-std v0.4.0
+    │   │   │   │   │   │   ├── num-traits v0.2.19 (*)
+    │   │   │   │   │   │   └── rand v0.8.5 (*)
+    │   │   │   │   │   ├── digest v0.10.7 (*)
+    │   │   │   │   │   └── num-bigint v0.4.6 (*)
+    │   │   │   │   ├── ark-std v0.4.0 (*)
+    │   │   │   │   ├── derivative v2.2.0 (proc-macro)
+    │   │   │   │   │   ├── proc-macro2 v1.0.95 (*)
+    │   │   │   │   │   ├── quote v1.0.40 (*)
+    │   │   │   │   │   └── syn v1.0.109 (*)
+    │   │   │   │   ├── digest v0.10.7 (*)
+    │   │   │   │   ├── itertools v0.10.5
+    │   │   │   │   │   └── either v1.15.0
+    │   │   │   │   ├── num-bigint v0.4.6 (*)
+    │   │   │   │   ├── num-traits v0.2.19 (*)
+    │   │   │   │   ├── paste v1.0.15 (proc-macro)
+    │   │   │   │   └── zeroize v1.8.1 (*)
+    │   │   │   │   [build-dependencies]
+    │   │   │   │   └── rustc_version v0.4.1 (*)
+    │   │   │   ├── ark-poly v0.4.2
+    │   │   │   │   ├── ark-ff v0.4.2 (*)
+    │   │   │   │   ├── ark-serialize v0.4.2 (*)
+    │   │   │   │   ├── ark-std v0.4.0 (*)
+    │   │   │   │   ├── derivative v2.2.0 (proc-macro) (*)
+    │   │   │   │   └── hashbrown v0.13.2 (*)
+    │   │   │   ├── ark-serialize v0.4.2 (*)
+    │   │   │   ├── ark-std v0.4.0 (*)
+    │   │   │   ├── derivative v2.2.0 (proc-macro) (*)
+    │   │   │   ├── hashbrown v0.13.2 (*)
+    │   │   │   ├── itertools v0.10.5 (*)
+    │   │   │   ├── num-traits v0.2.19 (*)
+    │   │   │   └── zeroize v1.8.1 (*)
+    │   │   ├── ark-ff v0.4.2 (*)
+    │   │   └── ark-std v0.4.0 (*)
+    │   ├── ark-ec v0.4.2 (*)
+    │   ├── ark-ff v0.4.2 (*)
+    │   ├── ark-serialize v0.4.2 (*)
+    │   ├── bytemuck v1.23.0 (*)
+    │   ├── solana-define-syscall v2.2.1
+    │   └── thiserror v2.0.12 (*)
+    ├── solana-client-traits v2.2.1 (*)
+    ├── solana-cluster-type v2.2.1 (*)
+    ├── solana-commitment-config v2.2.1 (*)
+    ├── solana-compute-budget-interface v2.2.2
+    │   ├── borsh v1.5.7 (*)
+    │   ├── serde v1.0.219 (*)
+    │   ├── serde_derive v1.0.219 (proc-macro) (*)
+    │   ├── solana-instruction v2.2.1 (*)
+    │   └── solana-sdk-ids v2.2.1 (*)
+    ├── solana-decode-error v2.2.1 (*)
+    ├── solana-derivation-path v2.2.1 (*)
+    ├── solana-ed25519-program v2.2.2 (*)
+    ├── solana-epoch-info v2.2.1 (*)
+    ├── solana-epoch-rewards-hasher v2.2.1
+    │   ├── siphasher v0.3.11
+    │   ├── solana-hash v2.2.1 (*)
+    │   └── solana-pubkey v2.2.1 (*)
+    ├── solana-feature-set v2.2.4 (*)
+    ├── solana-fee-structure v2.2.1
+    │   ├── serde v1.0.219 (*)
+    │   ├── serde_derive v1.0.219 (proc-macro) (*)
+    │   ├── solana-message v2.2.1 (*)
+    │   └── solana-native-token v2.2.1
+    ├── solana-genesis-config v2.2.1
+    │   ├── bincode v1.3.3 (*)
+    │   ├── chrono v0.4.41
+    │   │   └── num-traits v0.2.19 (*)
+    │   ├── memmap2 v0.5.10
+    │   │   └── libc v0.2.172
+    │   ├── serde v1.0.219 (*)
+    │   ├── serde_derive v1.0.219 (proc-macro) (*)
+    │   ├── solana-account v2.2.1 (*)
+    │   ├── solana-clock v2.2.1 (*)
+    │   ├── solana-cluster-type v2.2.1 (*)
+    │   ├── solana-epoch-schedule v2.2.1 (*)
+    │   ├── solana-fee-calculator v2.2.1 (*)
+    │   ├── solana-hash v2.2.1 (*)
+    │   ├── solana-inflation v2.2.1 (*)
+    │   ├── solana-keypair v2.2.1 (*)
+    │   ├── solana-logger v2.3.1
+    │   │   ├── env_logger v0.9.3
+    │   │   │   ├── atty v0.2.14
+    │   │   │   │   └── libc v0.2.172
+    │   │   │   ├── humantime v2.2.0
+    │   │   │   ├── log v0.4.27
+    │   │   │   ├── regex v1.11.1
+    │   │   │   │   ├── aho-corasick v1.1.3
+    │   │   │   │   │   └── memchr v2.7.4
+    │   │   │   │   ├── memchr v2.7.4
+    │   │   │   │   ├── regex-automata v0.4.9
+    │   │   │   │   │   ├── aho-corasick v1.1.3 (*)
+    │   │   │   │   │   ├── memchr v2.7.4
+    │   │   │   │   │   └── regex-syntax v0.8.5
+    │   │   │   │   └── regex-syntax v0.8.5
+    │   │   │   └── termcolor v1.4.1
+    │   │   ├── lazy_static v1.5.0
+    │   │   ├── libc v0.2.172
+    │   │   ├── log v0.4.27
+    │   │   └── signal-hook v0.3.17
+    │   │       ├── libc v0.2.172
+    │   │       └── signal-hook-registry v1.4.5 (*)
+    │   ├── solana-native-token v2.2.1
+    │   ├── solana-poh-config v2.2.1
+    │   │   ├── serde v1.0.219 (*)
+    │   │   └── serde_derive v1.0.219 (proc-macro) (*)
+    │   ├── solana-pubkey v2.2.1 (*)
+    │   ├── solana-rent v2.2.1 (*)
+    │   ├── solana-sdk-ids v2.2.1 (*)
+    │   ├── solana-sha256-hasher v2.2.1 (*)
+    │   ├── solana-shred-version v2.2.1
+    │   │   ├── solana-hard-forks v2.2.1
+    │   │   │   ├── serde v1.0.219 (*)
+    │   │   │   └── serde_derive v1.0.219 (proc-macro) (*)
+    │   │   ├── solana-hash v2.2.1 (*)
+    │   │   └── solana-sha256-hasher v2.2.1 (*)
+    │   ├── solana-signer v2.2.1 (*)
+    │   └── solana-time-utils v2.2.1
+    ├── solana-hard-forks v2.2.1 (*)
+    ├── solana-inflation v2.2.1 (*)
+    ├── solana-instruction v2.2.1 (*)
+    ├── solana-keypair v2.2.1 (*)
+    ├── solana-message v2.2.1 (*)
+    ├── solana-native-token v2.2.1
+    ├── solana-nonce-account v2.2.1
+    │   ├── solana-account v2.2.1 (*)
+    │   ├── solana-hash v2.2.1 (*)
+    │   ├── solana-nonce v2.2.1 (*)
+    │   └── solana-sdk-ids v2.2.1 (*)
+    ├── solana-offchain-message v2.2.1
+    │   ├── num_enum v0.7.3
+    │   │   └── num_enum_derive v0.7.3 (proc-macro)
+    │   │       ├── proc-macro-crate v3.3.0 (*)
+    │   │       ├── proc-macro2 v1.0.95 (*)
+    │   │       ├── quote v1.0.40 (*)
+    │   │       └── syn v2.0.101 (*)
+    │   ├── solana-hash v2.2.1 (*)
+    │   ├── solana-packet v2.2.1 (*)
+    │   ├── solana-pubkey v2.2.1 (*)
+    │   ├── solana-sanitize v2.2.1
+    │   ├── solana-sha256-hasher v2.2.1 (*)
+    │   ├── solana-signature v2.2.1 (*)
+    │   └── solana-signer v2.2.1 (*)
+    ├── solana-packet v2.2.1 (*)
+    ├── solana-poh-config v2.2.1 (*)
+    ├── solana-precompile-error v2.2.1 (*)
+    ├── solana-precompiles v2.2.1 (*)
+    ├── solana-presigner v2.2.1
+    │   ├── solana-pubkey v2.2.1 (*)
+    │   ├── solana-signature v2.2.1 (*)
+    │   └── solana-signer v2.2.1 (*)
+    ├── solana-program v2.2.1 (*)
+    ├── solana-program-memory v2.2.1 (*)
+    ├── solana-pubkey v2.2.1 (*)
+    ├── solana-quic-definitions v2.2.1 (*)
+    ├── solana-rent-collector v2.2.1
+    │   ├── serde v1.0.219 (*)
+    │   ├── serde_derive v1.0.219 (proc-macro) (*)
+    │   ├── solana-account v2.2.1 (*)
+    │   ├── solana-clock v2.2.1 (*)
+    │   ├── solana-epoch-schedule v2.2.1 (*)
+    │   ├── solana-genesis-config v2.2.1 (*)
+    │   ├── solana-pubkey v2.2.1 (*)
+    │   ├── solana-rent v2.2.1 (*)
+    │   └── solana-sdk-ids v2.2.1 (*)
+    ├── solana-rent-debits v2.2.1
+    │   ├── solana-pubkey v2.2.1 (*)
+    │   └── solana-reward-info v2.2.1 (*)
+    ├── solana-reserved-account-keys v2.2.1
+    │   ├── lazy_static v1.5.0
+    │   ├── solana-feature-set v2.2.4 (*)
+    │   ├── solana-pubkey v2.2.1 (*)
+    │   └── solana-sdk-ids v2.2.1 (*)
+    ├── solana-reward-info v2.2.1 (*)
+    ├── solana-sanitize v2.2.1
+    ├── solana-sdk-ids v2.2.1 (*)
+    ├── solana-sdk-macro v2.2.1 (proc-macro) (*)
+    ├── solana-secp256k1-program v2.2.1 (*)
+    ├── solana-secp256k1-recover v2.2.1 (*)
+    ├── solana-secp256r1-program v2.2.2 (*)
+    ├── solana-seed-derivable v2.2.1 (*)
+    ├── solana-seed-phrase v2.2.1 (*)
+    ├── solana-serde v2.2.1 (*)
+    ├── solana-serde-varint v2.2.1 (*)
+    ├── solana-short-vec v2.2.1 (*)
+    ├── solana-shred-version v2.2.1 (*)
+    ├── solana-signature v2.2.1 (*)
+    ├── solana-signer v2.2.1 (*)
+    ├── solana-system-transaction v2.2.1
+    │   ├── solana-hash v2.2.1 (*)
+    │   ├── solana-keypair v2.2.1 (*)
+    │   ├── solana-message v2.2.1 (*)
+    │   ├── solana-pubkey v2.2.1 (*)
+    │   ├── solana-signer v2.2.1 (*)
+    │   ├── solana-system-interface v1.0.0 (*)
+    │   └── solana-transaction v2.2.2 (*)
+    ├── solana-time-utils v2.2.1
+    ├── solana-transaction v2.2.2 (*)
+    ├── solana-transaction-context v2.2.1 (*)
+    ├── solana-transaction-error v2.2.1 (*)
+    ├── solana-validator-exit v2.2.1
+    └── thiserror v2.0.12 (*)
