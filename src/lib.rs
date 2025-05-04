@@ -11,7 +11,6 @@ use std::ffi::{c_void, CString};
 use std::os::raw::{c_char, c_uchar, c_int};
 use std::slice;
 use std::str::FromStr;
-use borsh::{BorshSerialize, BorshDeserialize};
 use blake3::hash;
 use serde::Serialize;
 
@@ -22,31 +21,30 @@ pub const PROGRAM_ID: &str = "E2oqjMNy7QH5xdighcB8Byvbfvo8hobGHsBC5V4p7pSW";
 
 #[account]
 pub struct AmpRecord {
-    pub media_hash: [u8; 32],           // w_hash (32 bytes)
-    pub metadata_hash: [u8; 24],        // BLAKE3 hash of Metadata (24 bytes)
-    pub tee_signature: [u8; 64],        // ECDSA signature (64 bytes)
-    pub developer_signature: [u8; 64],  // ECDSA signature (64 bytes)
-    pub tee_public_key: [u8; 32],       // ED25519 public key (32 bytes)
-    pub certificate_id: [u8; 16],       // 128-bit ID (16 bytes)
-    pub media_ref: [u8; 46],            // IPFS CID or Arweave ID (46 bytes)
-    pub commit_time: u32,               // 4-byte timestamp
-    pub metadata: Metadata,             // Borsh-serialized Metadata (~89 bytes)
-    pub owner: Pubkey,                  // User Pubkey (32 bytes)
-    pub bump: u8,                       // PDA bump seed (1 byte)
+    pub media_hash: [u8; 32],
+    pub metadata_hash: [u8; 24],
+    pub tee_signature: [u8; 64],
+    pub developer_signature: [u8; 64],
+    pub tee_public_key: [u8; 32],
+    pub certificate_id: [u8; 16],
+    pub media_ref: [u8; 46],
+    pub commit_time: u32,
+    pub metadata: Metadata,
+    pub owner: Pubkey,
+    pub bump: u8,
 }
 
-#[derive(BorshSerialize, BorshDeserialize, Serialize, Clone)]
+#[derive(AnchorSerialize, AnchorDeserialize, Serialize, Clone)]
 pub struct Metadata {
-    pub media_hash: [u8; 32],           // w_hash (32 bytes)
-    pub protocol_version: [u8; 4],      // e.g., "1.0\0\0" (4 bytes)
-    pub session_id: [u8; 16],           // 16-byte ID (128-bit)
-    pub timestamp: u32,                 // 4-byte Unix timestamp
-    pub lat: Option<f32>,               // 4 bytes or 1-byte null
-    pub lon: Option<f32>,               // 4 bytes or 1-byte null
-    pub fuzzed: u8,                     // 1-byte boolean (0 or 1)
-    pub fuzz_radius: Option<f32>,       // 4 bytes or 1-byte null
-    pub device: [u8; 16],               // 16-byte string (e.g., "iPhone\0...")
-    pub flags: u8,                      // 1-byte bitfield
+    pub protocol_version: [u8; 4],
+    pub session_id: [u8; 16],
+    pub timestamp: u32,
+    pub lat: Option<f32>,
+    pub lon: Option<f32>,
+    pub fuzzed: u8,
+    pub fuzz_radius: Option<f32>,
+    pub device: [u8; 16],
+    pub flags: u8,
 }
 
 #[repr(C)]
@@ -64,6 +62,7 @@ pub enum FfiError {
     InvalidKeypair,
     InvalidInput(String),
     SolanaClientError(solana_client::client_error::ClientError),
+    IoError(std::io::Error),
 }
 
 impl std::fmt::Display for FfiError {
@@ -72,6 +71,7 @@ impl std::fmt::Display for FfiError {
             FfiError::InvalidKeypair => write!(f, "Invalid keypair"),
             FfiError::InvalidInput(msg) => write!(f, "Invalid input data: {}", msg),
             FfiError::SolanaClientError(e) => write!(f, "Solana client error: {}", e),
+            FfiError::IoError(e) => write!(f, "IO error: {}", e),
         }
     }
 }
@@ -84,12 +84,18 @@ impl From<solana_client::client_error::ClientError> for FfiError {
     }
 }
 
+impl From<std::io::Error> for FfiError {
+    fn from(err: std::io::Error) -> Self {
+        FfiError::IoError(err)
+    }
+}
+
 // --- Constants ---
 
 const EXPECTED_KEYPAIR_LEN: i32 = 64;
 const EXPECTED_MEDIA_HASH_LEN: usize = 32;
 const EXPECTED_METADATA_HASH_LEN: usize = 24;
-const EXPECTED_METADATA_LEN: usize = 89;
+const EXPECTED_METADATA_LEN: usize = 57;
 const EXPECTED_TEE_SIGNATURE_LEN: usize = 64;
 const EXPECTED_TEE_PUBLIC_KEY_LEN: usize = 32;
 const EXPECTED_DEVELOPER_SIGNATURE_LEN: usize = 64;
@@ -203,14 +209,12 @@ pub extern "C" fn serialize_and_hash_metadata(
     device: *const u8,
     flags: u8,
 ) -> *mut SerializeResult {
-    // Validate inputs
     if media_hash.is_null() || protocol_version.is_null() || session_id.is_null() || 
        lat.is_null() || lon.is_null() || fuzz_radius.is_null() || device.is_null() {
         return std::ptr::null_mut();
     }
 
-    // Construct Metadata
-    let media_hash = unsafe { slice::from_raw_parts(media_hash, 32) }.try_into().unwrap();
+    let media_hash_array: [u8; 32] = unsafe { slice::from_raw_parts(media_hash, 32) }.try_into().unwrap();
     let protocol_version = unsafe { slice::from_raw_parts(protocol_version, 4) }.try_into().unwrap();
     let session_id = unsafe { slice::from_raw_parts(session_id, 16) }.try_into().unwrap();
     let lat = unsafe { lat.as_ref().map(|&x| x) };
@@ -219,7 +223,6 @@ pub extern "C" fn serialize_and_hash_metadata(
     let device = unsafe { slice::from_raw_parts(device, 16) }.try_into().unwrap();
 
     let metadata = Metadata {
-        media_hash,
         protocol_version,
         session_id,
         timestamp,
@@ -231,18 +234,19 @@ pub extern "C" fn serialize_and_hash_metadata(
         flags,
     };
 
-    // Serialize to bytes
-    let serialized = match metadata.try_to_vec() {
+    let metadata_serialized = match metadata.try_to_vec() {
         Ok(data) => data,
         Err(_) => return std::ptr::null_mut(),
     };
 
-    // Compute BLAKE3 hash (first 24 bytes)
-    let hash_full = hash(&serialized);
+    let mut hash_input = Vec::with_capacity(32 + metadata_serialized.len());
+    hash_input.extend_from_slice(&media_hash_array);
+    hash_input.extend_from_slice(&metadata_serialized);
+
+    let hash_full = hash(&hash_input);
     let hash_bytes = &hash_full.as_bytes()[..24];
 
-    // Allocate memory for serialized data and hash
-    let data_len = serialized.len();
+    let data_len = metadata_serialized.len();
     let hash_len = hash_bytes.len();
 
     let data_ptr = unsafe {
@@ -250,7 +254,7 @@ pub extern "C" fn serialize_and_hash_metadata(
         if ptr.is_null() {
             return std::ptr::null_mut();
         }
-        std::ptr::copy_nonoverlapping(serialized.as_ptr(), ptr, data_len);
+        std::ptr::copy_nonoverlapping(metadata_serialized.as_ptr(), ptr, data_len);
         ptr
     };
 
@@ -264,7 +268,6 @@ pub extern "C" fn serialize_and_hash_metadata(
         ptr
     };
 
-    // Return result
     let result = Box::new(SerializeResult {
         data_ptr,
         data_len,
@@ -348,7 +351,7 @@ fn try_send_add_record(
     let metadata_bytes_slice = unsafe { slice::from_raw_parts(metadata_bytes, metadata_len as usize) };
     let metadata: Metadata = borsh::BorshDeserialize::try_from_slice(metadata_bytes_slice).map_err(|_| {
         FfiError::InvalidInput(format!(
-            "Invalid metadata_bytes length or format: {}, expected: 89",
+            "Invalid metadata_bytes length or format: {}, expected: 57",
             metadata_bytes_slice.len()
         ))
     })?;
@@ -410,7 +413,7 @@ fn try_send_add_record(
     let pda_seeds = &[pubkey_bytes.as_ref(), media_hash.as_ref()];
     let (pda, _bump) = Pubkey::find_program_address(pda_seeds, &program_id);
 
-    let instruction_data = AddRecord {
+    let add_record_instruction = AddRecord {
         media_hash,
         metadata_hash,
         metadata,
@@ -420,9 +423,15 @@ fn try_send_add_record(
         certificate_id,
         media_ref,
         commit_time,
-    }.try_to_vec().map_err(|_| {
-        FfiError::InvalidInput("Failed to serialize AddRecord".to_string())
-    })?;
+    };
+
+    let discriminator = anchor_lang::solana_program::hash::hash(b"global:add_record").to_bytes()[..8].to_vec();
+    let mut instruction_data = discriminator;
+    instruction_data.extend_from_slice(
+        &add_record_instruction.try_to_vec().map_err(|_| {
+            FfiError::InvalidInput("Failed to serialize AddRecord".to_string())
+        })?,
+    );
 
     let accounts = vec![
         AccountMeta::new(pda, false),
@@ -528,9 +537,14 @@ fn try_delete_record(
     let pda_seeds = &[pubkey_bytes.as_ref(), media_hash.as_ref()];
     let (pda, _bump) = Pubkey::find_program_address(pda_seeds, &program_id);
 
-    let instruction_data = DeleteRecord {}.try_to_vec().map_err(|_| {
-        FfiError::InvalidInput("Failed to serialize DeleteRecord".to_string())
-    })?;
+    let delete_record_instruction = DeleteRecord {};
+    let discriminator = anchor_lang::solana_program::hash::hash(b"global:delete_record").to_bytes()[..8].to_vec();
+    let mut instruction_data = discriminator;
+    instruction_data.extend_from_slice(
+        &delete_record_instruction.try_to_vec().map_err(|_| {
+            FfiError::InvalidInput("Failed to serialize DeleteRecord".to_string())
+        })?,
+    );
 
     let accounts = vec![
         AccountMeta::new(pda, false),
@@ -556,7 +570,7 @@ fn try_delete_record(
 
 // --- Instruction Structs ---
 
-#[derive(AnchorSerialize)]
+#[derive(AnchorSerialize, AnchorDeserialize)]
 pub struct AddRecord {
     pub media_hash: [u8; 32],
     pub metadata_hash: [u8; 24],
@@ -609,15 +623,12 @@ mod tests {
         assert!(!result_ptr.is_null(), "Result pointer should not be null");
         unsafe {
             let result = &*result_ptr;
-            assert_eq!(result.data_len, 89, "Serialized data length should be 89");
+            assert_eq!(result.data_len, 57, "Serialized data length should be 57");
             assert_eq!(result.hash_len, 24, "Hash length should be 24");
 
             let serialized = slice::from_raw_parts(result.data_ptr, result.data_len);
             let hash = slice::from_raw_parts(result.hash_ptr, result.hash_len);
-            println!("Serialized (hex): {:02x?}", serialized);
-            println!("Hash (hex): {:02x?}", hash);
 
-            // Expected hash from tests/amp.ts for "moona" record
             let expected_hash = [
                 0xb1, 0xed, 0x78, 0x1d, 0xe9, 0x99, 0x4c, 0xfc,
                 0x50, 0xb2, 0xc8, 0x79, 0x7c, 0x67, 0xa6, 0x43,
@@ -625,9 +636,7 @@ mod tests {
             ];
             assert_eq!(hash, expected_hash, "Hash does not match expected");
 
-            // Verify serialization
             let metadata: Metadata = borsh::BorshDeserialize::try_from_slice(serialized).unwrap();
-            assert_eq!(metadata.media_hash, media_hash);
             assert_eq!(metadata.protocol_version, protocol_version);
             assert_eq!(metadata.session_id, session_id);
             assert_eq!(metadata.timestamp, timestamp);
