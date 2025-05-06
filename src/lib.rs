@@ -15,7 +15,7 @@ use blake3::hash;
 use serde::Serialize;
 
 // Program ID
-pub const PROGRAM_ID: &str = "E2oqjMNy7QH5xdighcB8Byvbfvo8hobGHsBC5V4p7pSW";
+pub const PROGRAM_ID: &str = "ENKMqg25PSLyojUB46NQNNbRirxn1t54uuiMo5X8CXjN";
 
 // --- Data Structures ---
 
@@ -154,8 +154,9 @@ pub extern "C" fn exists_record(
     keypair_bytes: *const c_uchar,
     keypair_len: i32,
     media_hash: *const c_uchar,
+    commit_time: u32,
 ) -> *mut c_char {
-    match try_exists_record(keypair_bytes, keypair_len, media_hash) {
+    match try_exists_record(keypair_bytes, keypair_len, media_hash, commit_time) {
         Ok(exists) => {
             let result = if exists { "1" } else { "0" };
             let c_str = CString::new(result).unwrap_or_else(|_| {
@@ -178,8 +179,9 @@ pub extern "C" fn delete_record(
     keypair_bytes: *const c_uchar,
     keypair_len: i32,
     media_hash: *const c_uchar,
+    commit_time: u32,
 ) -> *mut c_char {
-    match try_delete_record(keypair_bytes, keypair_len, media_hash) {
+    match try_delete_record(keypair_bytes, keypair_len, media_hash, commit_time) {
         Ok(signature) => {
             let c_str = CString::new(signature).unwrap_or_else(|_| {
                 CString::new("Error: Failed to create signature string").unwrap()
@@ -194,6 +196,70 @@ pub extern "C" fn delete_record(
             c_str.into_raw()
         }
     }
+}
+
+#[no_mangle]
+pub extern "C" fn calculate_pda(
+    keypair_bytes: *const c_uchar,
+    keypair_len: c_int,
+    media_hash: *const c_uchar, 
+    commit_time: u32
+) -> *mut c_char {
+    if keypair_bytes.is_null() || media_hash.is_null() {
+        let error_msg = "Error: Null pointer passed";
+        let c_str = CString::new(error_msg).unwrap();
+        return c_str.into_raw();
+    }
+
+    if keypair_len != EXPECTED_KEYPAIR_LEN {
+        let error_msg = format!("Invalid keypair length: {}, expected: {}", keypair_len, EXPECTED_KEYPAIR_LEN);
+        let c_str = CString::new(error_msg).unwrap();
+        return c_str.into_raw();
+    }
+
+    let keypair_slice = unsafe { slice::from_raw_parts(keypair_bytes, keypair_len as usize) };
+    let keypair = match Keypair::from_bytes(keypair_slice) {
+        Ok(kp) => kp,
+        Err(_) => {
+            let error_msg = "Error: Invalid keypair data";
+            let c_str = CString::new(error_msg).unwrap();
+            return c_str.into_raw();
+        }
+    };
+    
+    let media_hash_slice = unsafe { slice::from_raw_parts(media_hash, EXPECTED_MEDIA_HASH_LEN) };
+    let media_hash: [u8; 32] = match media_hash_slice.try_into() {
+        Ok(mh) => mh,
+        Err(_) => {
+            let error_msg = format!("Invalid media_hash length: {}, expected: {}", 
+                                   media_hash_slice.len(), EXPECTED_MEDIA_HASH_LEN);
+            let c_str = CString::new(error_msg).unwrap();
+            return c_str.into_raw();
+        }
+    };
+
+    let program_id = match Pubkey::from_str(PROGRAM_ID) {
+        Ok(pid) => pid,
+        Err(_) => {
+            let error_msg = "Error: Invalid program ID";
+            let c_str = CString::new(error_msg).unwrap();
+            return c_str.into_raw();
+        }
+    };
+    
+    let pubkey_bytes = keypair.pubkey().to_bytes();
+    let commit_time_bytes = commit_time.to_le_bytes();
+    let pda_seeds = &[
+        pubkey_bytes.as_ref(), 
+        media_hash.as_ref(), 
+        commit_time_bytes.as_ref()
+    ];
+    
+    let (pda, bump) = Pubkey::find_program_address(pda_seeds, &program_id);
+    
+    let result = format!("{}:{}", pda.to_string(), bump);
+    let c_str = CString::new(result).unwrap();
+    c_str.into_raw()
 }
 
 #[no_mangle]
@@ -409,8 +475,15 @@ fn try_send_add_record(
     let program_id = Pubkey::from_str(PROGRAM_ID).map_err(|_| {
         FfiError::InvalidInput("Invalid program ID".to_string())
     })?;
+    
+    // UPDATED: Use proper PDA calculation with commit_time included
     let pubkey_bytes = keypair.pubkey().to_bytes();
-    let pda_seeds = &[pubkey_bytes.as_ref(), media_hash.as_ref()];
+    let commit_time_bytes = commit_time.to_le_bytes();
+    let pda_seeds = &[
+        pubkey_bytes.as_ref(), 
+        media_hash.as_ref(), 
+        commit_time_bytes.as_ref()
+    ];
     let (pda, _bump) = Pubkey::find_program_address(pda_seeds, &program_id);
 
     let add_record_instruction = AddRecord {
@@ -456,10 +529,12 @@ fn try_send_add_record(
     Ok(signature.to_string())
 }
 
+// UPDATED: Added commit_time parameter to properly calculate the PDA
 fn try_exists_record(
     keypair_bytes: *const c_uchar,
     keypair_len: i32,
     media_hash: *const c_uchar,
+    commit_time: u32,
 ) -> std::result::Result<bool, FfiError> {
     if keypair_bytes.is_null() || media_hash.is_null() {
         return Err(FfiError::InvalidInput("Null pointer passed".to_string()));
@@ -488,8 +563,15 @@ fn try_exists_record(
     let program_id = Pubkey::from_str(PROGRAM_ID).map_err(|_| {
         FfiError::InvalidInput("Invalid program ID".to_string())
     })?;
+    
+    // UPDATED: Use proper PDA calculation with commit_time included
     let pubkey_bytes = keypair.pubkey().to_bytes();
-    let pda_seeds = &[pubkey_bytes.as_ref(), media_hash.as_ref()];
+    let commit_time_bytes = commit_time.to_le_bytes();
+    let pda_seeds = &[
+        pubkey_bytes.as_ref(), 
+        media_hash.as_ref(), 
+        commit_time_bytes.as_ref()
+    ];
     let (pda, _bump) = Pubkey::find_program_address(pda_seeds, &program_id);
 
     match client.get_account_data(&pda) {
@@ -501,10 +583,12 @@ fn try_exists_record(
     }
 }
 
+// UPDATED: Added commit_time parameter to properly calculate the PDA
 fn try_delete_record(
     keypair_bytes: *const c_uchar,
     keypair_len: i32,
     media_hash: *const c_uchar,
+    commit_time: u32,
 ) -> std::result::Result<String, FfiError> {
     if keypair_bytes.is_null() || media_hash.is_null() {
         return Err(FfiError::InvalidInput("Null pointer passed".to_string()));
@@ -533,8 +617,15 @@ fn try_delete_record(
     let program_id = Pubkey::from_str(PROGRAM_ID).map_err(|_| {
         FfiError::InvalidInput("Invalid program ID".to_string())
     })?;
+    
+    // UPDATED: Use proper PDA calculation with commit_time included
     let pubkey_bytes = keypair.pubkey().to_bytes();
-    let pda_seeds = &[pubkey_bytes.as_ref(), media_hash.as_ref()];
+    let commit_time_bytes = commit_time.to_le_bytes();
+    let pda_seeds = &[
+        pubkey_bytes.as_ref(), 
+        media_hash.as_ref(), 
+        commit_time_bytes.as_ref()
+    ];
     let (pda, _bump) = Pubkey::find_program_address(pda_seeds, &program_id);
 
     let delete_record_instruction = DeleteRecord {};
@@ -587,11 +678,320 @@ pub struct AddRecord {
 pub struct DeleteRecord {}
 
 // --- Tests ---
+#[cfg(test)]
+mod ffi_tests {
+    use super::*;
+    use std::fs::File;
+    use std::io::Read;
+    use std::path::PathBuf;
+    use std::time::{SystemTime, UNIX_EPOCH};
+    // Use std::result explicitly to avoid confusion with anchor's Result
+    use std::result::Result;
+
+    // Helper function to load devnet keypair
+    fn load_devnet_keypair() -> Result<Keypair, String> {
+        let home = std::env::var("HOME").map_err(|e| e.to_string())?;
+        let keypair_path = PathBuf::from(home).join(".config/solana/devnet-keypair.json");
+        
+        let mut file = File::open(keypair_path).map_err(|e| e.to_string())?;
+        let mut contents = String::new();
+        file.read_to_string(&mut contents).map_err(|e| e.to_string())?;
+        
+        // Parse JSON manually without serde_json
+        let json_str = contents.trim_start_matches('[').trim_end_matches(']');
+        let bytes: Vec<u8> = json_str
+            .split(',')
+            .map(|s| s.trim().parse::<u8>())
+            .collect::<Result<Vec<u8>, _>>()
+            .map_err(|e| e.to_string())?;
+        
+        Keypair::from_bytes(&bytes).map_err(|e| e.to_string())
+    }
+    
+    // Generate mock data with correct sizes
+    fn generate_test_data() -> (Vec<u8>, u32, Metadata) {
+        // Create deterministic but random-looking media hash
+        let mut media_hash = [0u8; 32];
+        for i in 0..32 {
+            media_hash[i] = (i * 7) as u8;
+        }
+        
+        // Current time as commit time
+        let now = SystemTime::now().duration_since(UNIX_EPOCH).unwrap();
+        let commit_time = now.as_secs() as u32;
+        
+        // Create test metadata
+        let protocol_version = [1, 0, 0, 0];
+        let mut session_id = [0u8; 16];
+        for i in 0..16 {
+            session_id[i] = (i * 11) as u8;
+        }
+        
+        let metadata = Metadata {
+            protocol_version,
+            session_id,
+            timestamp: commit_time,
+            lat: Some(42.3601),
+            lon: Some(-71.0589),
+            fuzzed: 1,
+            fuzz_radius: Some(1000.0),
+            device: [1; 16],
+            flags: 3,
+        };
+        
+        (media_hash.to_vec(), commit_time, metadata)
+    }
+    
+    // Test FFI end-to-end flow
+    #[test]
+    fn test_ffi_flow() {
+        // This test can be disabled with environment variables if needed
+        if std::env::var("SKIP_SOLANA_TESTS").is_ok() {
+            return;
+        }
+        
+        // Load keypair
+        let keypair = match load_devnet_keypair() {
+            Ok(kp) => kp,
+            Err(e) => {
+                println!("Failed to load devnet keypair: {}", e);
+                return;
+            }
+        };
+        
+        // Generate test data
+        let (media_hash, commit_time, metadata) = generate_test_data();
+        
+        // Serialize metadata
+        let serialized_metadata = metadata.try_to_vec().unwrap();
+        
+        // Generate mock hash and signatures
+        let metadata_hash = [2u8; 24];
+        let tee_signature = [3u8; 64];
+        let tee_public_key = [4u8; 32];
+        let developer_signature = [5u8; 64];
+        let certificate_id = [6u8; 16];
+        let media_ref = [7u8; 46];
+        
+        // First check if record exists (should be false)
+        let exists_result = try_exists_record(
+            keypair.to_bytes().as_ptr(),
+            keypair.to_bytes().len() as i32,
+            media_hash.as_ptr(),
+            commit_time
+        );
+        
+        match exists_result {
+            Ok(exists) => {
+                if exists {
+                    println!("Record unexpectedly exists, deleting first...");
+                    let _ = try_delete_record(
+                        keypair.to_bytes().as_ptr(),
+                        keypair.to_bytes().len() as i32,
+                        media_hash.as_ptr(),
+                        commit_time
+                    );
+                }
+            },
+            Err(e) => {
+                println!("Error checking if record exists: {}", e);
+                // Continue anyway
+            }
+        }
+        
+        // Test add record
+        println!("Testing add_record...");
+        let add_result = try_send_add_record(
+            keypair.to_bytes().as_ptr(),
+            keypair.to_bytes().len() as i32,
+            media_hash.as_ptr(),
+            serialized_metadata.as_ptr(),
+            serialized_metadata.len() as i32,
+            metadata_hash.as_ptr(),
+            tee_signature.as_ptr(),
+            tee_public_key.as_ptr(),
+            developer_signature.as_ptr(),
+            certificate_id.as_ptr(),
+            media_ref.as_ptr(),
+            commit_time
+        );
+        
+        match add_result {
+            Ok(signature) => {
+                println!("Successfully added record, signature: {}", signature);
+                
+                // Now check if record exists (should be true)
+                let exists_result = try_exists_record(
+                    keypair.to_bytes().as_ptr(),
+                    keypair.to_bytes().len() as i32,
+                    media_hash.as_ptr(),
+                    commit_time
+                );
+                
+                match exists_result {
+                    Ok(exists) => {
+                        assert!(exists, "Record should exist after adding");
+                        println!("Confirmed record exists!");
+                    },
+                    Err(e) => {
+                        panic!("Error checking if record exists after adding: {}", e);
+                    }
+                }
+                
+                // Test delete record
+                println!("Testing delete_record...");
+                let delete_result = try_delete_record(
+                    keypair.to_bytes().as_ptr(),
+                    keypair.to_bytes().len() as i32,
+                    media_hash.as_ptr(),
+                    commit_time
+                );
+                
+                match delete_result {
+                    Ok(signature) => {
+                        println!("Successfully deleted record, signature: {}", signature);
+                        
+                        // Verify record no longer exists
+                        let exists_result = try_exists_record(
+                            keypair.to_bytes().as_ptr(),
+                            keypair.to_bytes().len() as i32,
+                            media_hash.as_ptr(),
+                            commit_time
+                        );
+                        
+                        match exists_result {
+                            Ok(exists) => {
+                                assert!(!exists, "Record should not exist after deletion");
+                                println!("Confirmed record was deleted!");
+                            },
+                            Err(e) => {
+                                panic!("Error checking if record exists after deletion: {}", e);
+                            }
+                        }
+                    },
+                    Err(e) => {
+                        panic!("Error deleting record: {}", e);
+                    }
+                }
+            },
+            Err(e) => {
+                panic!("Error adding record: {}", e);
+            }
+        }
+    }
+    
+    #[test]
+    fn test_serialize_and_hash() {
+        // Generate test data
+        let (media_hash, commit_time, metadata) = generate_test_data();
+        
+        // Test the serialization and hashing
+        let result_ptr = serialize_and_hash_metadata(
+            media_hash.as_ptr(),
+            metadata.protocol_version.as_ptr(),
+            metadata.session_id.as_ptr(),
+            metadata.timestamp,
+            &metadata.lat.unwrap(),
+            &metadata.lon.unwrap(),
+            metadata.fuzzed,
+            &metadata.fuzz_radius.unwrap(),
+            metadata.device.as_ptr(),
+            metadata.flags
+        );
+        
+        assert!(!result_ptr.is_null(), "Serialization result should not be null");
+        
+        unsafe {
+            let result = &*result_ptr;
+            assert!(result.data_len > 0, "Serialized data should not be empty");
+            assert_eq!(result.hash_len, 24, "Hash length should be 24 bytes");
+            
+            // Clean up
+            free_serialize_result(result_ptr);
+        }
+    }
+}
+
+#[test]
+fn test_pda_generation_corrected() {
+    // Known good values from your debug output
+    let known_wallet_base58 = "BjMDzXiDKzThNF3oXaDvDzeeVC8PzN1xakAf6btJt5Ty";
+    
+    // Media hash as bytes - exact values from hex
+    let media_hash_hex = "fffffffffff1f801f801f801f801f8014001c001f001f801fc01fc01fc01ffff";
+    let mut media_hash = [0u8; 32];
+    hex_string_to_bytes(media_hash_hex, &mut media_hash);
+    
+    let known_commit_time: u32 = 1713115200;
+    let expected_pda_base58 = "7BAHNvy8nDVFnSn3NBmj53SQuioTgVCaTWRMqWFPvprs";
+    let expected_bump = 254;
+    
+    // IMPORTANT: Use the correct program ID from your test output
+    let program_id_str = "ENKMqg25PSLyojUB46NQNNbRirxn1t54uuiMo5X8CXjN";
+    let program_id = Pubkey::from_str(program_id_str).unwrap();
+    
+    // Convert Base58 pubkey to Pubkey
+    let pubkey = Pubkey::from_str(known_wallet_base58).unwrap();
+    
+    println!("\n===== CORRECTED PDA TEST =====");
+    println!("Using program ID: {}", program_id);
+    println!("Wallet public key: {}", pubkey);
+    println!("Media hash (hex): {}", media_hash_hex);
+    println!("Commit time: {}", known_commit_time);
+    
+    // Calculate PDA using LE commit time (from debug output)
+    let commit_time_le = known_commit_time.to_le_bytes();
+    println!("Commit time LE (hex): {}", bytes_to_hex(&commit_time_le));
+    
+    let pda_seeds = &[
+        pubkey.as_ref(), 
+        &media_hash, 
+        &commit_time_le
+    ];
+    
+    let (calculated_pda, bump) = Pubkey::find_program_address(pda_seeds, &program_id);
+    
+    println!("Calculated PDA: {}", calculated_pda);
+    println!("Calculated bump: {}", bump);
+    println!("Expected PDA: {}", expected_pda_base58);
+    println!("Expected bump: {}", expected_bump);
+    println!("Matches expected? {}", calculated_pda.to_string() == expected_pda_base58);
+    
+    assert_eq!(
+        calculated_pda.to_string(), expected_pda_base58,
+        "PDA calculation does not match expected PDA"
+    );
+    assert_eq!(
+        bump, expected_bump,
+        "Bump seed does not match expected bump"
+    );
+}
+
+// Helper function to convert hex string to bytes
+fn hex_string_to_bytes(hex: &str, output: &mut [u8]) {
+    for i in 0..min(hex.len()/2, output.len()) {
+        if let Ok(val) = u8::from_str_radix(&hex[i*2..i*2+2], 16) {
+            output[i] = val;
+        }
+    }
+}
+
+// Helper function to convert bytes to hex string
+fn bytes_to_hex(bytes: &[u8]) -> String {
+    let mut hex = String::new();
+    for byte in bytes {
+        hex.push_str(&format!("{:02x}", byte));
+    }
+    hex
+}
+
+fn min(a: usize, b: usize) -> usize {
+    if a < b { a } else { b }
+}
 
 #[cfg(test)]
 mod tests {
     use super::*;
-    use serde_json;
 
     #[test]
     fn test_serialize_and_hash_metadata() {
@@ -649,5 +1049,53 @@ mod tests {
 
             free_serialize_result(result_ptr);
         }
+    }
+    
+    // Add additional tests for commit_time in PDA calculation
+    #[test]
+    fn test_pda_calculation() {
+        // This test verifies that PDAs are calculated consistently
+        let keypair = Keypair::new();
+        let media_hash = [1u8; 32];
+        let commit_time = 1713115200u32;
+        
+        // Calculate PDA manually
+        let program_id = Pubkey::from_str(PROGRAM_ID).unwrap();
+        let pubkey_bytes = keypair.pubkey().to_bytes();
+        let commit_time_bytes = commit_time.to_le_bytes();
+        let pda_seeds = &[
+            pubkey_bytes.as_ref(), 
+            media_hash.as_ref(), 
+            commit_time_bytes.as_ref()
+        ];
+        let (pda1, _bump1) = Pubkey::find_program_address(pda_seeds, &program_id);
+        
+        // Verify that different commit times produce different PDAs
+        let commit_time2 = 1713115201u32;
+        let commit_time2_bytes = commit_time2.to_le_bytes();
+        let pda_seeds2 = &[
+            pubkey_bytes.as_ref(), 
+            media_hash.as_ref(), 
+            commit_time2_bytes.as_ref()
+        ];
+        let (pda2, _bump2) = Pubkey::find_program_address(pda_seeds2, &program_id);
+        
+        assert_ne!(pda1, pda2, "PDAs should be different with different commit times");
+        
+        // Verify that little-endian encoding is used consistently
+        let commit_time_be_bytes = [
+            ((commit_time >> 24) & 0xFF) as u8,
+            ((commit_time >> 16) & 0xFF) as u8,
+            ((commit_time >> 8) & 0xFF) as u8,
+            (commit_time & 0xFF) as u8,
+        ];
+        let pda_seeds_be = &[
+            pubkey_bytes.as_ref(), 
+            media_hash.as_ref(), 
+            &commit_time_be_bytes
+        ];
+        let (pda_be, _) = Pubkey::find_program_address(pda_seeds_be, &program_id);
+        
+        assert_ne!(pda1, pda_be, "Big-endian commit time should produce different PDA");
     }
 }
