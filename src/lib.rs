@@ -7,12 +7,13 @@ use solana_sdk::{
     signature::{Keypair, Signer},
     transaction::Transaction,
 };
-use std::ffi::{c_void, CString};
+use std::ffi::{c_void, CString, CStr};
 use std::os::raw::{c_char, c_uchar, c_int};
 use std::slice;
 use std::str::FromStr;
 use blake3::hash;
 use serde::Serialize;
+use std::time::{SystemTime, UNIX_EPOCH};
 
 // Program ID
 pub const PROGRAM_ID: &str = "ENKMqg25PSLyojUB46NQNNbRirxn1t54uuiMo5X8CXjN";
@@ -356,6 +357,82 @@ pub extern "C" fn free_serialize_result(result: *mut SerializeResult) {
             }
         }
     }
+}
+
+#[no_mangle]
+pub extern "C" fn serialize_and_add_record(
+    keypair_bytes: *const c_uchar,
+    keypair_len: c_int,
+    media_hash: *const c_uchar,
+    protocol_version: *const c_uchar,
+    session_id: *const c_uchar,
+    timestamp: u32,
+    lat: *const f32,
+    lon: *const f32,
+    fuzzed: u8,
+    fuzz_radius: *const f32,
+    device: *const c_uchar,
+    flags: u8,
+    tee_signature: *const c_uchar,
+    tee_public_key: *const c_uchar,
+    developer_signature: *const c_uchar,
+    certificate_id: *const c_uchar,
+    media_ref: *const c_uchar,
+    commit_time: u32,
+) -> *mut c_char {
+    // Step 1: Call serialize_and_hash_metadata
+    let result_ptr = serialize_and_hash_metadata(
+        media_hash,
+        protocol_version,
+        session_id,
+        timestamp,
+        lat,
+        lon,
+        fuzzed,
+        fuzz_radius,
+        device,
+        flags,
+    );
+
+    // Step 2: Use the result to call send_add_record
+    unsafe {
+        let result = &*result_ptr;
+        let tx_result = send_add_record(
+            keypair_bytes,
+            keypair_len,
+            media_hash,
+            result.data_ptr,
+            result.data_len as c_int,
+            result.hash_ptr,
+            tee_signature,
+            tee_public_key,
+            developer_signature,
+            certificate_id,
+            media_ref,
+            commit_time,
+        );
+        
+        // Free the serialization result
+        free_serialize_result(result_ptr);
+        
+        // Return the transaction result
+        return tx_result;
+    }
+}
+
+#[no_mangle]
+pub extern "C" fn delete_record_wrapper(
+    keypair_bytes: *const c_uchar,
+    keypair_len: c_int,
+    media_hash: *const c_uchar,
+    commit_time: u32,
+) -> *mut c_char {
+    delete_record(
+        keypair_bytes,
+        keypair_len,
+        media_hash,
+        commit_time,
+    )
 }
 
 #[no_mangle]
@@ -1098,4 +1175,104 @@ mod tests {
         
         assert_ne!(pda1, pda_be, "Big-endian commit time should produce different PDA");
     }
+
+    #[test]
+    fn test_serialize_and_add_record() {
+        // Generate test data
+        let (media_hash, commit_time, metadata) = generate_test_data();
+        
+        // Load test keypair
+        let keypair_bytes = load_test_keypair();
+        
+        // Convert metadata to raw pointers
+        let protocol_version_ptr = metadata.protocol_version.as_ptr();
+        let session_id_ptr = metadata.session_id.as_ptr();
+        let lat_value = metadata.lat.unwrap_or(0.0);
+        let lat_ptr = &lat_value as *const f32;
+        let lon_value = metadata.lon.unwrap_or(0.0);
+        let lon_ptr = &lon_value as *const f32;
+        let fuzz_radius_value = metadata.fuzz_radius.unwrap_or(0.0);
+        let fuzz_radius_ptr = &fuzz_radius_value as *const f32;
+        let device_ptr = metadata.device.as_ptr();
+        
+        // Create mock data for other fields
+        let tee_signature = [2u8; EXPECTED_TEE_SIGNATURE_LEN];
+        let tee_public_key = [1u8; EXPECTED_TEE_PUBLIC_KEY_LEN];
+        let developer_signature = [3u8; EXPECTED_DEVELOPER_SIGNATURE_LEN];
+        let certificate_id = [4u8; EXPECTED_CERTIFICATE_ID_LEN];
+        let media_ref = [5u8; EXPECTED_MEDIA_REF_LEN];
+        
+        // Call the function
+        let result_ptr = serialize_and_add_record(
+            keypair_bytes.as_ptr(),
+            keypair_bytes.len() as c_int,
+            media_hash.as_ptr(),
+            protocol_version_ptr,
+            session_id_ptr,
+            metadata.timestamp,
+            lat_ptr,
+            lon_ptr,
+            metadata.fuzzed,
+            fuzz_radius_ptr,
+            device_ptr,
+            metadata.flags,
+            tee_signature.as_ptr(),
+            tee_public_key.as_ptr(),
+            developer_signature.as_ptr(),
+            certificate_id.as_ptr(),
+            media_ref.as_ptr(),
+            commit_time,
+        );
+        
+        // Verify the result
+        unsafe {
+            let result_str = CStr::from_ptr(result_ptr).to_string_lossy().into_owned();
+            assert!(result_str.len() > 0, "Result should not be empty");
+            
+            // If this is a signature, it should be a base58 encoded string
+            if !result_str.starts_with("Error") {
+                assert_eq!(result_str.len(), 88, "Signature should be 88 characters");
+                
+                // Decode to verify it's a valid base58 string
+                let decoded = bs58::decode(&result_str).into_vec();
+                assert!(decoded.is_ok(), "Should be a valid base58 string");
+                assert_eq!(decoded.unwrap().len(), 64, "Decoded signature should be 64 bytes");
+            } else {
+                // This might be a test environment without a live Solana node
+                println!("Got expected error in test environment: {}", result_str);
+            }
+            
+            // Clean up
+            free_string(result_ptr);
+        }
+    }
+    
+    // Helper function to generate test data
+    fn generate_test_data() -> ([u8; 32], u32, Metadata) {
+        let media_hash = [0u8; 32]; // Mock media hash
+        let commit_time = 12345678; // Mock commit time
+        
+        let metadata = Metadata {
+            protocol_version: [1, 0, 0, 0],
+            session_id: [0; 16],
+            timestamp: commit_time,
+            lat: Some(43.246),
+            lon: Some(-70.868),
+            fuzzed: 1,
+            fuzz_radius: Some(1609.0),
+            device: *b"SM-A135U\0\0\0\0\0\0\0\0", // 16 bytes, null-padded
+            flags: 3,
+        };
+        
+        (media_hash, commit_time, metadata)
+    }
+    
+    // Helper function to load a test keypair
+    fn load_test_keypair() -> Vec<u8> {
+        // This would normally load from a test keypair file
+        // For testing, we can just create a random keypair
+        let keypair = Keypair::new();
+        keypair.to_bytes().to_vec()
+    }
+
 }

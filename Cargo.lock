@@ -3241,6 +3241,7 @@ dependencies = [
  "anchor-lang",
  "blake3",
  "borsh 0.10.4",
+ "bs58",
  "libc",
  "serde",
  "solana-client",
