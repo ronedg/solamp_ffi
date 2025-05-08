@@ -667,6 +667,9 @@ fn try_delete_record(
     media_hash: *const c_uchar,
     commit_time: u32,
 ) -> std::result::Result<String, FfiError> {
+    let discriminator = anchor_lang::solana_program::hash::hash(b"global:delete_record").to_bytes()[..8].to_vec();
+    println!("FFI: delete_record discriminator: {:?}", discriminator);
+
     if keypair_bytes.is_null() || media_hash.is_null() {
         return Err(FfiError::InvalidInput("Null pointer passed".to_string()));
     }
@@ -705,7 +708,9 @@ fn try_delete_record(
     ];
     let (pda, _bump) = Pubkey::find_program_address(pda_seeds, &program_id);
 
-    let delete_record_instruction = DeleteRecord {};
+    let delete_record_instruction = DeleteRecord {
+        commit_time,
+    };
     let discriminator = anchor_lang::solana_program::hash::hash(b"global:delete_record").to_bytes()[..8].to_vec();
     let mut instruction_data = discriminator;
     instruction_data.extend_from_slice(
@@ -752,7 +757,9 @@ pub struct AddRecord {
 }
 
 #[derive(AnchorSerialize)]
-pub struct DeleteRecord {}
+pub struct DeleteRecord {
+    pub commit_time: u32,  // Add this field
+}
 
 // --- Tests ---
 #[cfg(test)]
